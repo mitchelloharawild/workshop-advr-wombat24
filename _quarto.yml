@@ -1,0 +1,69 @@
+project:
+  type: website
+  resources:
+    - "images/twitter-card.png"
+    - "data"
+  render:
+    - "*.qmd"
+    - "!README.qmd"
+
+website:
+  page-navigation: true
+  title: "Advancing your R skills"
+  description: "Homepage for advanced R workshop at WOMBAT 2024"
+  site-url: "https://workshop.nectric.com.au/advr-wombat24"
+
+  repo-url: https://github.com/mitchelloharawild/workshop-advr-wombat24
+  repo-actions: [edit, issue]
+
+  # opengraph: true
+  twitter-card:
+    creator: "@mitchoharawild"
+    image: "/images/twitter-card.png"
+
+  favicon: "/images/Rlogo.svg"
+
+  page-footer:
+    left: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
+    right: "&copy; Copyright 2024, Nectric Pty Ltd"
+    background: "#426D98"
+
+  navbar:
+    background: "#426D98"
+    pinned: true
+    align: center
+    left:
+    - text: Slides
+      menu:
+        - text: Quirky R
+          href: slides/quirky/
+        - text: Metaprogramming
+          href: slides/metaprogramming/
+    # - text: Feedback
+    #   href: https://feedback.nectric.com.au/pZ26
+    - text: Exercises
+      href: exercises.qmd
+    right:
+      - icon: download
+        text: Downloads
+        menu:
+          - text: Everything
+            href: 'https://github.com/mitchelloharawild/workshop-advr-wombat24/archive/refs/heads/main.zip'
+          # - text: Slides
+            # href: 'slides.zip'
+          # - text: Lab sessions
+          #   href: 'labs.zip'
+      - icon: file-certificate
+        href: license.qmd
+      - icon: github
+        href: https://github.com/mitchelloharawild/workshop-advr-wombat24
+
+format:
+  html:
+    theme:
+      light: [cosmo, theme.scss]
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    mainfont: "Open Sans"
+    include-after-body: plausible.html

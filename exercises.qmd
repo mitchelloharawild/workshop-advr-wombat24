@@ -1,0 +1,13 @@
+---
+title: "Exercises"
+editor: source
+engine: knitr
+filters:
+  - webr-teachr
+  - quiz-teachr
+webr:
+  packages: ["rlang"]
+  autoload-packages: false
+---
+
+# Advaned R programming

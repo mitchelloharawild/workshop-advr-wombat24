@@ -1,0 +1,74 @@
+---
+title: "Advancing your R skills"
+---
+
+![](images/Rlogo.svg){style="float:right;padding: 0 0 0 10px;" fig-alt="R Logo" width="175"}
+
+## Course Overview
+
+R is widely used for data analysis and statistics, and from a programming perspective R is weird^[Watch Kelly Bodwin's UseR! keynote [*Keep R weird*](https://www.youtube.com/watch?v=KOQBfC1WPwM)]! The quirks of R is shocking to most programmers, but the language's flexibility is what makes it great for statistics and data. In this three-hour workshop you'll learn just how quirky R can be, we'll have some fun poking around R, and you'll leave with some useful tips and tricks for harnessing R's oddities in your analysis or packages.
+
+Ever wondered what a 'closure' is and why it isn't subsettable? Why do we need tibble when we have data.frame? How does tidy evaluation make the tidyverse so easy to use for analysis, but so difficult to automate? Why is it good (for R) to be lazy?! I'll answer all of these questions and more, along with any of your burning R questions. 
+
+This workshop is part of the [WOMBAT 2024](https://wombat2024.numbat.space/) workshop's tutorials, and will run in-person in Melbourne on October 22nd 2024.
+
+## Registration
+
+Registration costs AU\$150 (discounted to AU\$75 for students), tickets are available at <https://events.humanitix.com/wombat-2024-day-1>.
+
+**Please note that this is an advanced workshop for existing R users. New users to R should consider other workshops.**
+
+## Learning objectives
+
+Participants will learn how to:
+
+1. Understand (and embrace) the quirks of using R
+2. Appreciate how 'helpful' R tries to be with vectors, recycling and typing
+3. Use `vctrs` to avoid common problems with vectors, recycling and typing
+4. Write code that writes and runs code (metaprogramming)
+5. Use non-standard evaluation for good (and evil) code design
+
+# Educators
+
+## Instructor
+
+![](images/mitch.jpg){style="float:right;padding: 0 0 0 10px;" fig-alt="Headshot of Mitchell O'Hara-Wild" width="200"}
+
+[**Mitchell O'Hara-Wild**](https://mitchelloharawild.com/) (he/him) is an award-winning teaching associate at Monash University and consultant at Nectric with particular expertise in forecasting, data analysis and statistical computing using R. He is a prominent contributor to the R package ecosystem, developing many widely used packages for writing documents (vitae, icons), teaching (moodlequiz), visualising data (ggquiver, feasts) and forecasting (fable, forecast). Mitchell is passionate about designing friendly software that is easy to learn and use.
+
+<div align="center">
+<a href="https://www.mitchelloharawild.com"><img border="0" alt="Blog" src="https://assets.dryicons.com/uploads/icon/svg/4926/home.svg" width="35" height="35"></a>&ensp;
+<a href="https://github.com/mitchelloharawild"><img border="0" alt="Github" src="https://assets.dryicons.com/uploads/icon/svg/8312/cc33248a-e56e-4e7f-93f4-0e16350e5768.svg" width="35" height="35"></a>&ensp; 
+<a href="https://www.linkedin.com/in/mitchelloharawild/"><img border="0" alt="LinkedIn" src="https://assets.dryicons.com/uploads/icon/svg/8337/a347cd89-1662-4421-be90-58e5e8004eae.svg" width="35" height="35"></a>&ensp;&emsp;
+</div>
+
+
+# Preparation
+
+The workshop will provide a glimpse into advanced R, offering many useful tips and tricks for advanced R usage in analysis and package development.
+
+All R users will have fun and learn some useful tips in this workshop, however a strong familiarity with R and/or other programming languages will help get the most out of this workshop. The workshop assumes that participants are comfortable with control flow (if statements and for loops).
+
+Before the workshop I recommend that you read through the 'Foundations' chapter of 'Advanced R' by Hadley Wickham: https://adv-r.hadley.nz/foundations-intro.html
+
+## Required equipment
+
+Please bring your own laptop capable of running R.
+
+## Required software
+
+To be able to complete the exercises of this workshop, please install a suitable IDE (such as RStudio), a recent version of R (4.1+) and the following packages.
+
+-   **R developer packages**
+    -   rlang
+    -   vctrs
+    -   pryr
+    -   lobstr
+
+The following code will install the main packages needed for the workshop.
+
+```r
+install.packages(c("rlang", "vctrs", "pryr", "lobstr))
+```
+
+Please have the required software installed and pre-work completed before attending the workshop.
