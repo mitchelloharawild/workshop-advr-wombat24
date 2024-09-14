@@ -2,7 +2,7 @@
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-# WOMBAT 2024: Advancing your R skills
+# WOMBAT 2024: Advanced R Tips and Tricks
 
 <!-- badges: start -->
 <!-- badges: end -->

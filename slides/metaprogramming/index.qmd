@@ -30,7 +30,7 @@ library(rlang)
 ::: {.column width="60%"}
 
 ::: {.title data-id="title"}
-Advancing your R skills
+Advanced R Tips and Tricks
 :::
 
 ::: {.subtitle data-id="subtitle"}

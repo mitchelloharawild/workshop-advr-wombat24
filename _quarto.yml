@@ -9,7 +9,7 @@ project:
 
 website:
   page-navigation: true
-  title: "Advancing your R skills"
+  title: "Advanced R Tips and Tricks"
   description: "Homepage for advanced R workshop at WOMBAT 2024"
   site-url: "https://workshop.nectric.com.au/advr-wombat24"
 
