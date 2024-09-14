@@ -2,21 +2,21 @@
   {
     "objectID": "slides/quirks/index.html#section",
     "href": "slides/quirks/index.html#section",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "",
-    "text": "Advancing your R skills\n\n\nQuirky R\n\n\n22nd October 2024 @ WOMBAT\n\nMitchell O’Hara-Wild, Nectric\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
+    "text": "Advanced R Tips and Tricks\n\n\nQuirky R\n\n\n22nd October 2024 @ WOMBAT\n\nMitchell O’Hara-Wild, Nectric\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
   },
   {
     "objectID": "slides/quirks/index.html#after-the-break",
     "href": "slides/quirks/index.html#after-the-break",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "After the break…",
     "text": "After the break…\n\n\n\n\n\n\n\n\nLearn more advanced R tricks\n\n\n\nAdvanced R 2nd edition textbook\n\nFreely available online! https://adv-r.hadley.nz/\n\n\n\n\n\n\n\n\n\nI appreciate your feedback\n\n\nShort feedback form: https://feedback.nectric.com.au/pZ26\n\n\n\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
   },
   {
     "objectID": "slides/quirks/index.html#unsplash-credits",
     "href": "slides/quirks/index.html#unsplash-credits",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Unsplash credits",
     "text": "Unsplash credits\n\n\n\n\n\n\n\nThanks to these Unsplash contributors for their photos\n\n\n\n\n\nSander Weeteling: Photo\nKasia Gajek: Photo\nNASA: United States seen from orbit\nBalint Mendlik: Photo\nSander Weeteling: Photo"
   },
@@ -37,70 +37,70 @@
   {
     "objectID": "index.html#course-overview",
     "href": "index.html#course-overview",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Course Overview",
     "text": "Course Overview\nR is widely used for data analysis and statistics, and from a programming perspective R is weird1! The quirks of R is shocking to most programmers, but the language’s flexibility is what makes it great for statistics and data. In this three-hour workshop you’ll learn just how quirky R can be, we’ll have some fun poking around R, and you’ll leave with some useful tips and tricks for harnessing R’s oddities in your analysis or packages.\nEver wondered what a ‘closure’ is and why it isn’t subsettable? Why do we need tibble when we have data.frame? How does tidy evaluation make the tidyverse so easy to use for analysis, but so difficult to automate? Why is it good (for R) to be lazy?! I’ll answer all of these questions and more, along with any of your burning R questions.\nThis workshop is part of the WOMBAT 2024 workshop’s tutorials, and will run in-person in Melbourne on October 22nd 2024."
   },
   {
     "objectID": "index.html#registration",
     "href": "index.html#registration",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Registration",
     "text": "Registration\nRegistration costs AU$150 (discounted to AU$75 for students), tickets are available at https://events.humanitix.com/wombat-2024-day-1.\nPlease note that this is an advanced workshop for existing R users. New users to R should consider other workshops."
   },
   {
     "objectID": "index.html#learning-objectives",
     "href": "index.html#learning-objectives",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Learning objectives",
     "text": "Learning objectives\nParticipants will learn how to:\n\nUnderstand (and embrace) the quirks of using R\nAppreciate how ‘helpful’ R tries to be with vectors, recycling and typing\nUse vctrs to avoid common problems with vectors, recycling and typing\nWrite code that writes and runs code (metaprogramming)\nUse non-standard evaluation for good (and evil) code design"
   },
   {
     "objectID": "index.html#instructor",
     "href": "index.html#instructor",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Instructor",
     "text": "Instructor\n\nMitchell O’Hara-Wild (he/him) is an award-winning teaching associate at Monash University and consultant at Nectric with particular expertise in forecasting, data analysis and statistical computing using R. He is a prominent contributor to the R package ecosystem, developing many widely used packages for writing documents (vitae, icons), teaching (moodlequiz), visualising data (ggquiver, feasts) and forecasting (fable, forecast). Mitchell is passionate about designing friendly software that is easy to learn and use."
   },
   {
     "objectID": "index.html#required-equipment",
     "href": "index.html#required-equipment",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Required equipment",
     "text": "Required equipment\nPlease bring your own laptop capable of running R."
   },
   {
     "objectID": "index.html#required-software",
     "href": "index.html#required-software",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Required software",
     "text": "Required software\nTo be able to complete the exercises of this workshop, please install a suitable IDE (such as RStudio), a recent version of R (4.1+) and the following packages.\n\nR developer packages\n\nrlang\nvctrs\npryr\nlobstr\n\n\nThe following code will install the main packages needed for the workshop.\ninstall.packages(c(\"rlang\", \"vctrs\", \"pryr\", \"lobstr))\nPlease have the required software installed and pre-work completed before attending the workshop."
   },
   {
     "objectID": "index.html#footnotes",
     "href": "index.html#footnotes",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nWatch Kelly Bodwin’s UseR! keynote Keep R weird↩︎"
   },
   {
     "objectID": "slides/metaprogramming/index.html#section",
     "href": "slides/metaprogramming/index.html#section",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "",
-    "text": "Advancing your R skills\n\n\nMetaprogramming\n\n\n22nd October 2024 @ WOMBAT\n\nMitchell O’Hara-Wild, Nectric\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
+    "text": "Advanced R Tips and Tricks\n\n\nMetaprogramming\n\n\n22nd October 2024 @ WOMBAT\n\nMitchell O’Hara-Wild, Nectric\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
   },
   {
     "objectID": "slides/metaprogramming/index.html#thats-all-we-have-time-for",
     "href": "slides/metaprogramming/index.html#thats-all-we-have-time-for",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "That’s all we have time for!",
     "text": "That’s all we have time for!\n\n\n\n\n\n\n\n\nLearn more advanced R tricks\n\n\n\nAdvanced R 2nd edition textbook\n\nFreely available online! https://adv-r.hadley.nz/\n\n\n\n\n\n\n\n\n\nI appreciate your feedback\n\n\nShort feedback form: https://feedback.nectric.com.au/pZ26\n\n\n\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
   },
   {
     "objectID": "slides/metaprogramming/index.html#unsplash-credits",
     "href": "slides/metaprogramming/index.html#unsplash-credits",
-    "title": "Advancing your R skills",
+    "title": "Advanced R Tips and Tricks",
     "section": "Unsplash credits",
     "text": "Unsplash credits\n\n\n\n\n\n\n\nThanks to these Unsplash contributors for their photos\n\n\n\n\n\nSander Weeteling: Photo\nKasia Gajek: Photo\nNASA: United States seen from orbit\nBalint Mendlik: Photo\nSander Weeteling: Photo"
   }
