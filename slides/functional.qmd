@@ -620,7 +620,7 @@ We're studying the letters in 3 bowls of alphabet soup.
 ## Reduce vectors to single values
 
 ::: {.callout-caution}
-**Your turn!**
+## Your turn!
 
 We're studying the letters in 3 bowls of alphabet soup.
 
@@ -641,7 +641,7 @@ alphabet_soup
 purrr also offers many *adverbs*, which modify a function.
 
 ::: {.callout-note icon=false}
-**Capturing conditions**
+## Capturing conditions
 
 * `possibly(.f, otherwise)`: If the function errors, it will return `otherwise` instead.
 * `safely(.f)`: The function now returns a list with 'result' and 'error', preventing errors.
@@ -653,13 +653,13 @@ purrr also offers many *adverbs*, which modify a function.
 purrr also offers many *adverbs*, which modify a function.
 
 ::: {.callout-note icon=false}
-**Capturing conditions**
+## Capturing conditions
 
 * `negate(.f)` will return `!result`.
 :::
 
 ::: {.callout-note icon=false}
-**Chaining functions**
+## Chaining functions
 
 * `compose(...)` will chain functions together like a chain of piped functions.
 :::

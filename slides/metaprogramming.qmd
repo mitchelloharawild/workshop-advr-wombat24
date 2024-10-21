@@ -242,7 +242,7 @@ It also allows us to take code, and change how it is ran.
 
 ::: {.callout-note icon=false}
 
-**Standard evaluation**
+## Standard evaluation
 
 * The code and environment is unchanged.
 * The result is evaluated as expected.
@@ -252,7 +252,7 @@ It also allows us to take code, and change how it is ran.
 
 ::: {.callout-note icon=false}
 
-**Non-standard evaluation (NSE)**
+## Non-standard evaluation (NSE)
 
 * The code and/or the environment is changed.
 * Leading to the evaluated result changing.
