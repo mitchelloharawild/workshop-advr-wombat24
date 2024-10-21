@@ -60,7 +60,11 @@ Please bring your own laptop capable of running R.
 
 To be able to complete the exercises of this workshop, please install a suitable IDE (such as RStudio), a recent version of R (4.1+) and the following packages.
 
--   **R developer packages**
+-   **Data analysis packages**
+    -   dplyr
+    -   purrr
+    
+-   **Developer packages**
     -   rlang
     -   vctrs
     -   pryr
@@ -69,7 +73,7 @@ To be able to complete the exercises of this workshop, please install a suitable
 The following code will install the main packages needed for the workshop.
 
 ```r
-install.packages(c("rlang", "vctrs", "pryr", "lobstr))
+install.packages(c("dplyr", "purrr", "rlang", "vctrs", "pryr", "lobstr))
 ```
 
 Please have the required software installed and pre-work completed before attending the workshop.
