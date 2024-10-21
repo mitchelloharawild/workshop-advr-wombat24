@@ -1,346 +1,542 @@
 [
   {
-    "objectID": "slides/metaprogramming/index.html#section",
-    "href": "slides/metaprogramming/index.html#section",
-    "title": "Advanced R Tips and Tricks",
-    "section": "",
-    "text": "Advanced R  Tips and Tricks\n\n\nMetaprogramming\n\n\n22nd October 2024 @ WOMBAT\n\nMitchell O’Hara-Wild, Nectric\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
+    "objectID": "slides/metaprogramming.html#outline",
+    "href": "slides/metaprogramming.html#outline",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Outline",
+    "text": "Outline"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#metaprogramming",
-    "href": "slides/metaprogramming/index.html#metaprogramming",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#metaprogramming-1",
+    "href": "slides/metaprogramming.html#metaprogramming-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Metaprogramming",
     "text": "Metaprogramming\nMetaprogramming is programming about programming.\nIn other words, writing code that can inspect and modify code.\n\n\n\n\n\n\n\n\nA powerful idea\n\n\nUnlike most programming languages, R embraces metaprogramming and non-standard evaluation (NSE).\nThis powers much of the strange but wonderful interface designs in R and its packages."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#the-rlang-package",
-    "href": "slides/metaprogramming/index.html#the-rlang-package",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#the-rlang-package",
+    "href": "slides/metaprogramming.html#the-rlang-package",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "The rlang package",
-    "text": "The rlang package\n\nlibrary(rlang)\n\n\nA package for writing R code that interacts with R code.\n\n\n\n\n\n\n\nNot a new idea!\n\n\nMetaprogramming/NSE doesn’t require the rlang package.\nThere are base R equivalents to the functions shown today.\nNSE is widely used in base R (not just in the tidyverse!)"
+    "text": "The rlang package\n\nlibrary(rlang)\n\nA package for writing R code that interacts with R code.\n\n\n\n\n\n\n\nNot a new idea!\n\n\nMetaprogramming/NSE doesn’t need the rlang package.\nThere are base R equivalents to the functions shown.\nNSE is widely used in base R (not just in the tidyverse!)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#parsing-code",
-    "href": "slides/metaprogramming/index.html#parsing-code",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#parsing-code",
+    "href": "slides/metaprogramming.html#parsing-code",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Parsing code",
     "text": "Parsing code\nEvery time you run code anywhere in R it needs to be ‘interpreted’ by the parser.\nThe parser reads unstructured text (your written code) and interprets it as an expression.\n\n# parse(text = \"seq(1, 10, by = 0.5)\")\nparse_expr(\"seq(1, 10, by = 0.5)\")\n\nseq(1, 10, by = 0.5)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#deparsing-code",
-    "href": "slides/metaprogramming/index.html#deparsing-code",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#deparsing-code",
+    "href": "slides/metaprogramming.html#deparsing-code",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Deparsing code",
     "text": "Deparsing code\nDeparsing takes an expression and converts it back to text.\n\nmy_seq &lt;- parse_expr(\"seq(1, 10, by = 0.5)\")\nexpr_text(my_seq)\n\n[1] \"seq(1, 10, by = 0.5)\"\n\n\nThis can be useful for providing informative error messages, or print output for objects which store expressions."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#code-is-data",
-    "href": "slides/metaprogramming/index.html#code-is-data",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#code-is-data",
+    "href": "slides/metaprogramming.html#code-is-data",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Code is data",
     "text": "Code is data\nExpressions (code) can be used like any other data in R.\n\nmy_seq &lt;- parse_expr(\"seq(1, 10, by = 0.5)\")\nmy_seq\n\nseq(1, 10, by = 0.5)\n\n\n\n\nclass(my_seq)\n\n[1] \"call\"\n\n\n\n\neval(my_seq)\n\n [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0  6.5  7.0  7.5  8.0\n[16]  8.5  9.0  9.5 10.0"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#inspecting-code",
-    "href": "slides/metaprogramming/index.html#inspecting-code",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#inspecting-code",
+    "href": "slides/metaprogramming.html#inspecting-code",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Inspecting code",
     "text": "Inspecting code\nR expressions behave exactly like lists\n\nas.list(my_seq)\n\n[[1]]\nseq\n\n[[2]]\n[1] 1\n\n[[3]]\n[1] 10\n\n$by\n[1] 0.5"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#inspecting-code-1",
-    "href": "slides/metaprogramming/index.html#inspecting-code-1",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#inspecting-code-1",
+    "href": "slides/metaprogramming.html#inspecting-code-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Inspecting code",
     "text": "Inspecting code\nThey can also be subsetted to inspect the functions and arguments.\n\nmy_seq[[1]]\n\nseq\n\nmy_seq[[\"by\"]]\n\n[1] 0.5"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#modifying-code",
-    "href": "slides/metaprogramming/index.html#modifying-code",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#modifying-code",
+    "href": "slides/metaprogramming.html#modifying-code",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Modifying code",
     "text": "Modifying code\nExpressions can be modified by replacing their elements.\n\nmy_seq[[\"by\"]] &lt;- 1\nmy_seq\n\nseq(1, 10, by = 1)\n\neval(my_seq)\n\n [1]  1  2  3  4  5  6  7  8  9 10"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#looking-at-code",
-    "href": "slides/metaprogramming/index.html#looking-at-code",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#looking-at-code",
+    "href": "slides/metaprogramming.html#looking-at-code",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Looking at code",
     "text": "Looking at code\n\n\n\n\n\n\n\nYour turn!\n\n\nHow do infix operators (like +, *, and %in%) get interpreted by the parser?\nTry to parse 5 + 3 * 7, and see how the order of operations are represented in the parsed expression.\nBonus: rewrite this expression without infix operators."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#abstract-syntax-trees",
-    "href": "slides/metaprogramming/index.html#abstract-syntax-trees",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#abstract-syntax-trees",
+    "href": "slides/metaprogramming.html#abstract-syntax-trees",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Abstract syntax trees",
     "text": "Abstract syntax trees\nThe structure of expressions is commonly known as an abstract syntax tree (AST). We can use lobstr::ast() to explore it.\n\nlobstr::ast(f(x, \"y\", 1))"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#abstract-syntax-trees-1",
-    "href": "slides/metaprogramming/index.html#abstract-syntax-trees-1",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#abstract-syntax-trees-1",
+    "href": "slides/metaprogramming.html#abstract-syntax-trees-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Abstract syntax trees",
     "text": "Abstract syntax trees\nMore complicated (nested) code results in a larger/deeper AST.\n\nlobstr::ast(f(g(1, 2), h(3, 4, i())))"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#abstract-syntax-trees-2",
-    "href": "slides/metaprogramming/index.html#abstract-syntax-trees-2",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#abstract-syntax-trees-2",
+    "href": "slides/metaprogramming.html#abstract-syntax-trees-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Abstract syntax trees",
     "text": "Abstract syntax trees\n\n\n\n\n\n\n\nYour turn!\n\n\nInspect the AST for the following code:\n\n5 + 3 * 7\nmtcars |&gt; select(cyl)\nmtcars |&gt; mutate(wt/hp)\n\nHow does R structure these expressions?\nBonus: does -2^2 yield 4 or -4? Why?"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#analysing-code",
-    "href": "slides/metaprogramming/index.html#analysing-code",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#analysing-code",
+    "href": "slides/metaprogramming.html#analysing-code",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Analysing code",
     "text": "Analysing code\nHow would you programmatically analyse code from hundreds of packages?\n\nRegular expressions on the source code? Maybe…\nTraverse the parsed source code’s AST? Yes!\n\n\n\nThis however can be tricky, requiring recursive algorithms that explore the AST using breadth/depth first search (BFS/DFS)."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#coding-code",
-    "href": "slides/metaprogramming/index.html#coding-code",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#coding-code",
+    "href": "slides/metaprogramming.html#coding-code",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Coding code",
     "text": "Coding code\nYou can also write code that creates code. For this we use the call2() function\n\n# call(\"seq\", 1, 10, by = 0.5)\ncall2(\"seq\", 1, 10, by = 0.5)\n\nseq(1, 10, by = 0.5)\n\n\n\n\n\n\n\n\n\n\nparse_expr() or call2()?\n\n\nYou might be tempted to parse() code that you paste() together, but this is unsafe and unreliable! Why?"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#coding-code-1",
-    "href": "slides/metaprogramming/index.html#coding-code-1",
-    "title": "Advanced R Tips and Tricks",
-    "section": "Coding code",
-    "text": "Coding code\n\n\n\n\n\n\n\nAfter the break…\n\n\nRecall in week 8 (shiny) I shared this function:\n\nreact &lt;- function(e) new_function(alist(), expr(eval(!!enexpr(e))))\n\nNext we’ll learn how it uses NSE to change how code runs."
+    "objectID": "slides/metaprogramming.html#metaprogramming-2",
+    "href": "slides/metaprogramming.html#metaprogramming-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Metaprogramming",
+    "text": "Metaprogramming\n\n\n\n\n\n\nCoding code\n\n\nMetaprogramming allows us to create code with code!\nIt also allows us to take code, and change how it is ran."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#code-evaluation",
-    "href": "slides/metaprogramming/index.html#code-evaluation",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#code-evaluation",
+    "href": "slides/metaprogramming.html#code-evaluation",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Code evaluation",
-    "text": "Code evaluation\n\n\n\n\nStandard evaluation\n\n\n\nThe code and environment is unchanged.\nThe result is evaluated as expected.\n\n\n\n\n\n\n\n\n\n\nNon-standard evaluation (NSE)\n\n\n\nThe code and/or the environment is changed.\nLeading to the evaluated result changing."
+    "text": "Code evaluation\n\n\n\nNote\n\n\nStandard evaluation\n\nThe code and environment is unchanged.\nThe result is evaluated as expected.\n\n\n\n\n\n\n\n\nNote\n\n\nNon-standard evaluation (NSE)\n\nThe code and/or the environment is changed.\nLeading to the evaluated result changing."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#standard-or-non-standard-evaluation",
-    "href": "slides/metaprogramming/index.html#standard-or-non-standard-evaluation",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#standard-or-non-standard-evaluation",
+    "href": "slides/metaprogramming.html#standard-or-non-standard-evaluation",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Standard or non-standard evaluation?",
-    "text": "Standard or non-standard evaluation?\n\n\n\n\n\n\n\nYour turn!\n\n\nDo the following functions use standard evaluation or NSE?\n\n\nlibrary(rlang)\na + b * c\nmtcars |&gt; select(cyl)\nread_csv(\"data/study.csv\")\nggplot() + geom_line()\nmtcars |&gt; mutate(wt/hp)\nwith(mtcars, wt/hp)"
+    "text": "Standard or non-standard evaluation?\n\n\n\n\n\n\n\nYour turn!\n\n\nDo these expressions use standard evaluation or NSE?\n\n\nlibrary(rlang)\na + b * c\nmtcars |&gt; select(cyl)\nread_csv(\"data/study.csv\")\nggplot() + geom_line()\nmtcars |&gt; mutate(wt/hp)\nwith(mtcars, wt/hp)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#the-building-blocks-of-code-evaluation",
-    "href": "slides/metaprogramming/index.html#the-building-blocks-of-code-evaluation",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#the-building-blocks-of-code-evaluation",
+    "href": "slides/metaprogramming.html#the-building-blocks-of-code-evaluation",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "The building blocks of code evaluation",
     "text": "The building blocks of code evaluation\nThere are four building blocks used in evaluating code.\n\nConstants: A specific value like 1 or \"data/study.csv\".\nSymbols: A name of an object, like pi.\nExpressions: Code structured as an AST.\nEnvironments: The place where named objects are found.\n\n\n\n\n\n\n\n\n\nQuestion?\n\n\nHow are these building blocks used together to construct and evaluate code?"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#the-building-blocks-of-code-evaluation-1",
-    "href": "slides/metaprogramming/index.html#the-building-blocks-of-code-evaluation-1",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#the-building-blocks-of-code-evaluation-1",
+    "href": "slides/metaprogramming.html#the-building-blocks-of-code-evaluation-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "The building blocks of code evaluation",
-    "text": "The building blocks of code evaluation\nIn rlang, we have three main building block functions:\n\nsym(\"pi\"): a symbol/name like pi\nexpr(1/pi): an expression for 1/pi\nquo(1/pi): a quosure (expression and environment)\n\n\n\n\n\n\n\n\n\nFollow along!\n\n\nUse call2() and these building blocks to construct and evaluate mtcars |&gt; mutate(wt/hp).\nHint: recall that x |&gt; f(y) is parsed as f(x, y)."
+    "text": "The building blocks of code evaluation\nIn rlang, we have three main building block functions:\n\nsym(\"pi\"): a symbol/name like pi\nexpr(1/pi): an expression for 1/pi\nquo(1/pi): a quosure (expression and environment)\n\n\n\n\n\n\n\n\n\nFollow along!\n\n\nUse call2() and these building blocks to construct and evaluate mtcars |&gt; mutate(wt/hp).\nHint: x |&gt; f(y) is parsed as f(x, y)."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#the-building-blocks-of-code-evaluation-2",
-    "href": "slides/metaprogramming/index.html#the-building-blocks-of-code-evaluation-2",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#the-building-blocks-of-code-evaluation-2",
+    "href": "slides/metaprogramming.html#the-building-blocks-of-code-evaluation-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "The building blocks of code evaluation",
     "text": "The building blocks of code evaluation\n\n\n\n\n\n\n\nYour turn!\n\n\nSpot the difference.\nHow do the results of the following functions differ?\n\nsym(\"2 * pi\")\nexpr(2 * pi)\nquo(2 * pi)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#capturing-code",
-    "href": "slides/metaprogramming/index.html#capturing-code",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#capturing-code",
+    "href": "slides/metaprogramming.html#capturing-code",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Capturing code",
     "text": "Capturing code\nMore often than not, NSE involves capturing user code that was used in your function. This is done with en*() functions:\n\nensym(x): capture a symbol\nenexpr(x): capture an expression\nenquo(x): capture a quosure\n\n\nThese must be used inside functions, for example:\n\ncapture_expr &lt;- function(x) {\n  enexpr(x)\n}\ncapture_expr(1/pi)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#unquoting-bang-bang",
-    "href": "slides/metaprogramming/index.html#unquoting-bang-bang",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#unquoting-bang-bang",
+    "href": "slides/metaprogramming.html#unquoting-bang-bang",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Unquoting (bang-bang!!)",
     "text": "Unquoting (bang-bang!!)\nWhy doesn’t the following code work?\n\nlog_expr &lt;- function(x) {\n  # Capture expression\n  x &lt;- enexpr(x)\n  # Return new expression with log()\n  expr(log(x))\n}\nlog_expr(1/pi)\n\nlog(x)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#unquoting-bang-bang-1",
-    "href": "slides/metaprogramming/index.html#unquoting-bang-bang-1",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#unquoting-bang-bang-1",
+    "href": "slides/metaprogramming.html#unquoting-bang-bang-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Unquoting (bang-bang!!)",
     "text": "Unquoting (bang-bang!!)\nTo use captured code in our functions, we need to unquote it.\n\nlog_expr &lt;- function(x) {\n  # Capture expression\n  x &lt;- enexpr(x)\n  # Return new expression with log()\n  expr(log(!!x))\n}\nlog_expr(1/pi)\n\nlog(1/pi)\n\n\nexpr(log(!!x)) will create an expression (expr()) that replaces x with its value (1/pi)."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#unquoting-bang-bang-2",
-    "href": "slides/metaprogramming/index.html#unquoting-bang-bang-2",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#unquoting-bang-bang-2",
+    "href": "slides/metaprogramming.html#unquoting-bang-bang-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Unquoting (bang-bang!!)",
     "text": "Unquoting (bang-bang!!)\n\n\n\n\n\n\n\nUnquoting in analysis\n\n\nUnquoting replaces the object’s name with its value.\nThis is also useful when using NSE functions.\n\n\n\n\nHow can !! be useful with dplyr?"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#unquoting-bang-bang-3",
-    "href": "slides/metaprogramming/index.html#unquoting-bang-bang-3",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#unquoting-bang-bang-3",
+    "href": "slides/metaprogramming.html#unquoting-bang-bang-3",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Unquoting (bang-bang!!)",
     "text": "Unquoting (bang-bang!!)\nSuppose we wanted to programmatically filter() mtcars$cyl:\n\ncyl &lt;- 4\nmtcars |&gt; \n  filter(cyl == cyl)\n\nWhat’s the problem? How can unquoting help?"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#embracing-inputs-curly-curly",
-    "href": "slides/metaprogramming/index.html#embracing-inputs-curly-curly",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#embracing-inputs-curly-curly",
+    "href": "slides/metaprogramming.html#embracing-inputs-curly-curly",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Embracing inputs ({{curly-curly}})",
     "text": "Embracing inputs ({{curly-curly}})\nThe pattern !!enquo(x) is so often in functions that it has a special shortcut known as ‘embrace’ or ‘curly-curly’. The code {x} is identical to !!enquo(x).\nConsider this function for summarising a value’s range:\n\nvar_summary &lt;- function(data, var) {\n  data |&gt; \n    summarise(n = n(), min = min({{ var }}), max = max({{ var }}))\n}\nmtcars |&gt; \n  group_by(cyl) |&gt; \n  var_summary(mpg)\n\nWhy is enquo() important here?"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#unquote-splicing-bang-bang-bang",
-    "href": "slides/metaprogramming/index.html#unquote-splicing-bang-bang-bang",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#unquote-splicing-bang-bang-bang",
+    "href": "slides/metaprogramming.html#unquote-splicing-bang-bang-bang",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Unquote-splicing (bang-bang-bang!!!)",
     "text": "Unquote-splicing (bang-bang-bang!!!)\nIt is sometimes useful to unquote multiple code elements across multiple arguments of a function.\nThis is done with unquote-splicing using !!! on a list of symbols, expressions, or quosures.\n\nA list symbols, expressions, or quosures can be:\n\ncreated with syms(), exprs(), quos()\ncaptured with ensyms(), enexprs(), enquos()\n\nThis is often used to capture, modify and pass on dots (...)."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#unquote-splicing-bang-bang-bang-1",
-    "href": "slides/metaprogramming/index.html#unquote-splicing-bang-bang-bang-1",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#unquote-splicing-bang-bang-bang-1",
+    "href": "slides/metaprogramming.html#unquote-splicing-bang-bang-bang-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Unquote-splicing (bang-bang-bang!!!)",
     "text": "Unquote-splicing (bang-bang-bang!!!)\nFor example, the var_summary() function can be extended to accept multiple variables (or expressions) via dots (...).\n\nvar_summaries &lt;- function(data, ...) {\n  vars &lt;- enquos(...)\n  .min &lt;- purrr::map(vars, ~ expr(min(!!.)))\n  .max &lt;- purrr::map(vars, ~ expr(max(!!.)))\n  data |&gt; \n    summarise(n = n(), !!!.min, !!!.max)\n}\nmtcars |&gt; \n  group_by(cyl) |&gt; \n  var_summaries(mpg, wt)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidy-dots",
-    "href": "slides/metaprogramming/index.html#tidy-dots",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#tidy-dots",
+    "href": "slides/metaprogramming.html#tidy-dots",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Tidy dots (:=)",
     "text": "Tidy dots (:=)\nTidy dots (:=) allow the argument names to be unquoted too.\nFor example:\n\nmy_df &lt;- function(x) {\n  tibble(!!expr_text(enexpr(x)) := x * 2)\n}\nmy_var &lt;- 10\nmy_df(my_var)\n\n# A tibble: 1 x 1\n  my_var\n   &lt;dbl&gt;\n1     20\n\n\nYou can alternatively use !!! with a named list."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidy-evaluation-1",
-    "href": "slides/metaprogramming/index.html#tidy-evaluation-1",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#tidy-evaluation-1",
+    "href": "slides/metaprogramming.html#tidy-evaluation-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Tidy evaluation",
     "text": "Tidy evaluation\nTidy evaluation refers to the use of NSE in the tidyverse to make data analysis easier.\nNSE is used widely across tidyverse packages, but at the same time it is used sparingly.\n\n\n\n\n\n\n\nYour turn!\n\n\nQuestion\nWhere have you seen NSE used in tidyverse packages?"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidy-evaluation-2",
-    "href": "slides/metaprogramming/index.html#tidy-evaluation-2",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#tidy-evaluation-2",
+    "href": "slides/metaprogramming.html#tidy-evaluation-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Tidy evaluation",
     "text": "Tidy evaluation\nTidy evaluation searches the variables of the data first, followed by the search path of the user’s environment.\nThis is a type of NSE, since it changes the environment in which code is ran.\n\nmtcars |&gt; \n  mutate(mpg/wt)\n\nmpg/wt would ordinarily error since mpg and wt aren’t found, but mutate() uses NSE to first search the dataset."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidy-evaluation-3",
-    "href": "slides/metaprogramming/index.html#tidy-evaluation-3",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#tidy-evaluation-3",
+    "href": "slides/metaprogramming.html#tidy-evaluation-3",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Tidy evaluation",
     "text": "Tidy evaluation\nThis is accomplished using eval_tidy(), with the arguments:\n\nexpr: The expression (code) to evaluate\ndata: The dataset ‘mask’ to search first\nenv: The environment to search next.\n\nUnlike eval(), this will:\n\nRespect the environments of quosures\nAttach pronouns for .data and .env"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidy-evaluation-4",
-    "href": "slides/metaprogramming/index.html#tidy-evaluation-4",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#tidy-evaluation-4",
+    "href": "slides/metaprogramming.html#tidy-evaluation-4",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Tidy evaluation",
     "text": "Tidy evaluation\nWe can use eval_tidy() to create a simple dplyr::mutate() function variant.\n\nmy_mutate &lt;- function(.data, mutation) {\n  mutation &lt;- enquo(mutation)\n  result &lt;- eval_tidy(mutation, data = .data, env = caller_env())\n  .data[[as_label(mutation)]] &lt;- result\n  .data\n}\nmtcars |&gt; \n  my_mutate(mpg/wt)\n\nQuestion: What features are missing in our function compared to dplyr::mutate()?"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidyselect",
-    "href": "slides/metaprogramming/index.html#tidyselect",
-    "title": "Advanced R Tips and Tricks",
-    "section": "tidyselect",
-    "text": "tidyselect\nThe tidyselect package is useful for selecting variables from a dataset with NSE.\nYou almost certainly have used it in the tidyverse without knowing.\nIt powers column selection in:\n\ndplyr for select(), across(), and more.\ntidyr for almost everything."
+    "objectID": "slides/metaprogramming.html#domain-specific-languages-tidyselect",
+    "href": "slides/metaprogramming.html#domain-specific-languages-tidyselect",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Domain specific languages: tidyselect",
+    "text": "Domain specific languages: tidyselect\nThe tidyselect package is useful for selecting variables from a dataset using NSE. The code/behaviour is so different it forms a domain specific language (DSL).\n\n\n\n\n\n\ntidyselect in the wild\n\n\nYou almost certainly have used tidyselect in the tidyverse.\nIt powers column selection in:\n\ndplyr for select(), across(), and more.\ntidyr for almost everything."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidyselect-1",
-    "href": "slides/metaprogramming/index.html#tidyselect-1",
-    "title": "Advanced R Tips and Tricks",
-    "section": "tidyselect",
-    "text": "tidyselect\nIt enables variable selection with a domain specific language (DSL), which uses NSE to identify columns with:\n\nvar1:var10\nmatches(\"x.\\\\d\")\nall_of(&lt;chr&gt;)\nwhere(&lt;fn&gt;)"
+    "objectID": "slides/metaprogramming.html#domain-specific-languages-tidyselect-1",
+    "href": "slides/metaprogramming.html#domain-specific-languages-tidyselect-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Domain specific languages: tidyselect",
+    "text": "Domain specific languages: tidyselect\nThe tidyselect domain specific language (DSL), which uses NSE to identify columns with:\n\nvar1:var10\nmatches(\"x.\\\\d\")\nall_of(&lt;chr&gt;)\nwhere(&lt;fn&gt;)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidyselect-2",
-    "href": "slides/metaprogramming/index.html#tidyselect-2",
-    "title": "Advanced R Tips and Tricks",
-    "section": "tidyselect",
-    "text": "tidyselect\nIf you need tidy column selection, simply import and use tidyselect::eval_select().\n\nlibrary(tidyselect)\nx &lt;- expr(mpg:cyl)\neval_select(x, mtcars)\n\nmpg cyl \n  1   2 \n\n\nThis function returns the column numbers that were selected."
+    "objectID": "slides/metaprogramming.html#domain-specific-languages-tidyselect-2",
+    "href": "slides/metaprogramming.html#domain-specific-languages-tidyselect-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Domain specific languages: tidyselect",
+    "text": "Domain specific languages: tidyselect\nIf you need tidy column selection, simply import and use tidyselect::eval_select().\n\nlibrary(tidyselect)\nx &lt;- expr(mpg:cyl)\neval_select(x, mtcars)\n\nmpg cyl \n  1   2 \n\n\nThis function returns the column numbers that were selected."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidyselect-3",
-    "href": "slides/metaprogramming/index.html#tidyselect-3",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#tidyselect",
+    "href": "slides/metaprogramming.html#tidyselect",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "tidyselect",
-    "text": "tidyselect\nPutting it all together, we can create our own dplyr::select() function variant.\n\nmy_select &lt;- function(.data, cols) {\n  cols &lt;- eval_select(enexpr(cols), .data)\n  .data[cols]\n}\nmy_select(mtcars, c(mpg, wt, vs:carb))\n\n\n\n\n\n\n\n\nYour turn!\n\n\nModify this function to instead accept the selected columns via the dots (...), just like dplyr::select() does."
+    "text": "tidyselect\nPutting it all together, we can create our own dplyr::select() function variant.\n\nmy_select &lt;- function(.data, cols) {\n  cols &lt;- eval_select(enexpr(cols), .data)\n  .data[cols]\n}\nmy_select(mtcars, c(mpg, wt, vs:carb))\n\n\n\n\n\n\n\n\nYour turn!\n\n\nModify this function to instead accept the selected columns via the dots (...), just like dplyr::select()."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#tidyverse-design-principles",
-    "href": "slides/metaprogramming/index.html#tidyverse-design-principles",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#tidyverse-design-principles",
+    "href": "slides/metaprogramming.html#tidyverse-design-principles",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Tidyverse design principles",
     "text": "Tidyverse design principles\nNotice how little NSE the tidyverse uses to great effect.\nA lot of thought has gone into designing the tidyverse, which mostly uses standard evaluation: https://design.tidyverse.org/\n\n\n\n\n\n\n\n\nA design compromise\n\n\nWhile very appreciated by users, NSE introduces a lot of complexity when programming with tidyverse packages."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#software-design-with-nse",
-    "href": "slides/metaprogramming/index.html#software-design-with-nse",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#software-design-with-nse",
+    "href": "slides/metaprogramming.html#software-design-with-nse",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Software design with NSE",
-    "text": "Software design with NSE\nIn most cases you shouldn’t add NSE to your package.\n\n\n\n\n\n\n\n\nWhy?\n\n\nNSE can be incredibly confusing for users!\nCode might work outside your function, but be completely different when used inside it.\n\n\n\n\n\n\nUnderstanding NSE however is very useful for advanced use of tidyverse packages in non-interactive contexts."
+    "text": "Software design with NSE\nIn most cases you shouldn’t use NSE in your code.\n\n\n\n\n\n\n\n\nWhy?\n\n\nNSE can be incredibly confusing for others!\nCode might work outside your function, but is completely different when used inside it.\n\n\n\n\n\n\nUnderstanding NSE however is very useful for advanced use of tidyverse packages in non-interactive contexts."
   },
   {
-    "objectID": "slides/metaprogramming/index.html#software-design-with-nse-1",
-    "href": "slides/metaprogramming/index.html#software-design-with-nse-1",
-    "title": "Advanced R Tips and Tricks",
+    "objectID": "slides/metaprogramming.html#software-design-with-nse-1",
+    "href": "slides/metaprogramming.html#software-design-with-nse-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Software design with NSE",
     "text": "Software design with NSE\nIf you must use NSE, you should:\n\nUse it sparingly\nBe consistent\nClearly document it\nGet a lot of design benefit from it\n(not just for slightly less typing!)"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#thats-all-we-have-time-for",
-    "href": "slides/metaprogramming/index.html#thats-all-we-have-time-for",
-    "title": "Advanced R Tips and Tricks",
-    "section": "That’s all we have time for!",
-    "text": "That’s all we have time for!\n\n\n\n\n\n\n\n\nLearn more advanced R tricks\n\n\n\nAdvanced R 2nd edition textbook\n\nFreely available online! https://adv-r.hadley.nz/\n\n\n\n\n\n\n\n\n\nI appreciate your feedback\n\n\nShort feedback form: https://feedback.nectric.com.au/pZ26\n\n\n\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
+    "objectID": "slides/quirks.html#outline",
+    "href": "slides/quirks.html#outline",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Outline",
+    "text": "Outline"
   },
   {
-    "objectID": "slides/metaprogramming/index.html#unsplash-credits",
-    "href": "slides/metaprogramming/index.html#unsplash-credits",
-    "title": "Advanced R Tips and Tricks",
-    "section": "Unsplash credits",
-    "text": "Unsplash credits\n\n\n\n\n\n\n\nThanks to these Unsplash contributors for their photos\n\n\n\n\n\nSander Weeteling: Photo\nKasia Gajek: Photo\nNASA: United States seen from orbit\nBalint Mendlik: Photo\nSander Weeteling: Photo"
+    "objectID": "slides/quirks.html#hello",
+    "href": "slides/quirks.html#hello",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Hello!",
+    "text": "Hello!\nI’m Mitch!\nI make lots of R packages, and teach lots of people!\n\n\n\n\nAmong other things…\n\n\n\nPhD candidate at Monash University\nData consulting and workshops at Nectric\nSpecialised in time series analysis\nDevelops R packages (fable, vitae, etc.)\nGrows all the things (hobby permaculturist)"
   },
   {
-    "objectID": "slides/quirks/index.html#section",
-    "href": "slides/quirks/index.html#section",
-    "title": "Advanced R Tips and Tricks",
-    "section": "",
-    "text": "Advanced R  Tips and Tricks\n\n\nQuirky R\n\n\n22nd October 2024 @ WOMBAT\n\nMitchell O’Hara-Wild, Nectric\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
+    "objectID": "slides/quirks.html#workshop-materials",
+    "href": "slides/quirks.html#workshop-materials",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Workshop materials",
+    "text": "Workshop materials\nAre all on the website:\nhttps://workshop.nectric.com.au/advr-wombat24/\n\n\n\n\n\n\n\nHere you’ll find…\n\n\n\nthese slides\ndemonstrated code\nvideo recordings\neverything you’ll need (for the workshop)"
   },
   {
-    "objectID": "slides/quirks/index.html#section-1",
-    "href": "slides/quirks/index.html#section-1",
-    "title": "Advanced R Tips and Tricks",
-    "section": "",
-    "text": "🎯 Today’s goals\n\n\n\nLearn about time series data.\nVisualise common time series patterns.\nProduce forecasts from a statistical models.\nEvaluate the forecasting accuracy.\n\n\n\n\n\n\n\n\n🌻 Expectations\n\n\n\nFollow the code of conduct.\nAsk relevant questions any time, Q&A during breaks.\nBe kind and respectful.\nMake mistakes and learn!\n\n\n\n\n\nhttps://workshop.nectric.com.au/user2024/"
+    "objectID": "slides/quirks.html#todays-goals-very-ambitious",
+    "href": "slides/quirks.html#todays-goals-very-ambitious",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Today’s goals (very ambitious!)",
+    "text": "Today’s goals (very ambitious!)\n\nUnderstand (and embrace) the quirks of using R\n‘Appreciate’ how ‘helpful’ R tries to be\nUse vctrs to avoid common problems with vectors\nLearn functional programming\nWrite code that writes and runs code (metaprogramming)\nUse non-standard evaluation for code design"
   },
   {
-    "objectID": "slides/quirks/index.html#section-2",
-    "href": "slides/quirks/index.html#section-2",
-    "title": "Advanced R Tips and Tricks",
-    "section": "",
-    "text": "Mitchell O’Hara‑Wild\nMonash + Nectric\n @mitchelloharawild\n @mitchelloharawild\n\nWelcome, who am I?\n\n🎓 PhD candidate at Monash University\n📊 Data consulting and workshops at Nectric\n📈 Specialised in time series analysis\n📦 Develops R packages (fable, vitae, etc.)\n🤖 DIYs IoT devices for home automation\n🌱 Permaculturist (🐝, 🐣, 🍄, 🌞)"
+    "objectID": "slides/quirks.html#expectations",
+    "href": "slides/quirks.html#expectations",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Expectations",
+    "text": "Expectations\n\nFollow the code of conduct\nBe kind and respectful\nAsk relevant questions any time\nGeneral Q&A during breaks\nMake mistakes and learn!\n\n\n\n\n\n\n\n\n\nAsk lots of questions!\n\n\nWe’ll have the most fun exploring the depths of R together."
   },
   {
-    "objectID": "slides/quirks/index.html#section-3",
-    "href": "slides/quirks/index.html#section-3",
-    "title": "Advanced R Tips and Tricks",
-    "section": "",
-    "text": "You!\nUseR! attendee\n\n🙋 Hi, who are you?\nHands up if…\n\n\n🧑‍💻 You’ve used R\n📊 You’ve analysed data\n🫧 Used tidyverse packages (dplyr, ggplot2…)\n📈 You’ve worked with time series data before\n🔮 You’ve produced a forecast before\n🤩 You’ve used fable!"
+    "objectID": "slides/quirks.html#the-first-question",
+    "href": "slides/quirks.html#the-first-question",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "The first question",
+    "text": "The first question\n\n\n\n\n\n\n\nYour turn!\n\n\nWhy are you here?\nWhat motivates you to learn ‘advanced R’ tips and tricks?\n\n\n\n\n\n\n\nimprove your analysis code?\nmake better R packages?\nsomething else?"
   },
   {
-    "objectID": "slides/quirks/index.html#after-the-break",
-    "href": "slides/quirks/index.html#after-the-break",
-    "title": "Advanced R Tips and Tricks",
-    "section": "After the break…",
-    "text": "After the break…\n\n\n\n\n\n\n\n\nLearn more advanced R tricks\n\n\n\nAdvanced R 2nd edition textbook\n\nFreely available online! https://adv-r.hadley.nz/\n\n\n\n\n\n\n\n\n\nI appreciate your feedback\n\n\nShort feedback form: https://feedback.nectric.com.au/pZ26\n\n\n\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
+    "objectID": "slides/quirks.html#r-is-weird-1",
+    "href": "slides/quirks.html#r-is-weird-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "R is weird!",
+    "text": "R is weird!\nFeatured in Kelly Bodwin’s useR! 2024 keynote “Keep R weird”."
   },
   {
-    "objectID": "slides/quirks/index.html#unsplash-credits",
-    "href": "slides/quirks/index.html#unsplash-credits",
-    "title": "Advanced R Tips and Tricks",
-    "section": "Unsplash credits",
-    "text": "Unsplash credits\n\n\n\n\n\n\n\nThanks to these Unsplash contributors for their photos\n\n\n\n\n\nSander Weeteling: Photo\nKasia Gajek: Photo\nNASA: United States seen from orbit\nBalint Mendlik: Photo\nSander Weeteling: Photo"
+    "objectID": "slides/quirks.html#r-is-weird-2",
+    "href": "slides/quirks.html#r-is-weird-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "R is weird!",
+    "text": "R is weird!\nMost software developers (of other languages) are SHOCKED when they see all the ‘weird’ behaviour of R.\n\n\nindexing from 1\neverything is a vectors (there are no scalars)\nNA (missing values)\nobject types, casting, recycling\nfunctional programming design\nlazy and non-standard evaluation\nlets you do anything"
+  },
+  {
+    "objectID": "slides/quirks.html#r-is-quirky",
+    "href": "slides/quirks.html#r-is-quirky",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "R is QUIRKY!",
+    "text": "R is QUIRKY!\nI prefer to think of R as quirky.\nThese quirks are often ‘helpful’ for data analysis.\n\n\nindexing from 1\neverything is a vectors (there are no scalars)\nNA (missing values)\nobject types, casting, recycling\nfunctional programming design\nlazy and non-standard evaluation\nlets you do anything"
+  },
+  {
+    "objectID": "slides/quirks.html#r-is-quirky-1",
+    "href": "slides/quirks.html#r-is-quirky-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "R is QUIRKY!",
+    "text": "R is QUIRKY!\nI prefer to think of R as quirky.\nThese quirks are often ‘helpful’ for data analysis.\n\n\n\n\n\n\nR’s ‘help’ can hurt!\n\n\nUnlike stricter languages, sometimes R’s helpful nature can cause nasty programming problems."
+  },
+  {
+    "objectID": "slides/quirks.html#workshop-content",
+    "href": "slides/quirks.html#workshop-content",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Workshop content",
+    "text": "Workshop content\nThere’s a lot of fun things I can show you about R…"
+  },
+  {
+    "objectID": "slides/quirks.html#workshop-content-1",
+    "href": "slides/quirks.html#workshop-content-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Workshop content",
+    "text": "Workshop content\n\n\n\n\n\n\nChaotic evil\n\n\nWe can explore the ‘dark side’ and produce truly evil code…\n\n\n\n\n\n\n\n\n\n\nLawful good\n\n\nOr create lovely code which effortlessly solves problems."
+  },
+  {
+    "objectID": "slides/quirks.html#the-dark-side",
+    "href": "slides/quirks.html#the-dark-side",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "The dark side",
+    "text": "The dark side"
+  },
+  {
+    "objectID": "slides/quirks.html#the-dark-side-1",
+    "href": "slides/quirks.html#the-dark-side-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "The dark side",
+    "text": "The dark side\nR let’s you do almost anything!\n\nThis includes (figuratively) shooting yourself in the foot.\n\n\n\n\nactive bindings\nchanging R itself\nhttps://github.com/romainfrancois/evil.R/\nattach(structure(list(), class = \"UserDefinedDatabase\"))"
+  },
+  {
+    "objectID": "slides/quirks.html#workshop-content-2",
+    "href": "slides/quirks.html#workshop-content-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Workshop content",
+    "text": "Workshop content\nToday we’ll learn useful tips and tricks for R.\n\nAvoid common mistakes\nUse powerful features\n\n\nThis workshop will focus on three R-centric topics:\n\nVectorisation\nFunctional programming\nNon-standard evaluation"
+  },
+  {
+    "objectID": "slides/quirks.html#workshop-content-3",
+    "href": "slides/quirks.html#workshop-content-3",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Workshop content",
+    "text": "Workshop content\n\n\n\n\n\n\nTextbook reference\n\n\nMuch more Advanced R can be found in Hadley Wickham’s Advanced R book. It’s freely available online here:\nhttps://adv-r.hadley.nz/"
+  },
+  {
+    "objectID": "slides/quirks.html#vectorisation-1",
+    "href": "slides/quirks.html#vectorisation-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Vectorisation",
+    "text": "Vectorisation\nR’s design around vectors is perfect for data.\nVectors are objects which store data (several datum) together.\n\n\n\n\n\n\nYour turn!\n\n\nWhat types of vectors (‘data’) do we have?"
+  },
+  {
+    "objectID": "slides/quirks.html#types-of-vectors",
+    "href": "slides/quirks.html#types-of-vectors",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Types of vectors",
+    "text": "Types of vectors\nThere are two types of vectors in R:\n\nAtomic (single-type)\nList (mixed-type)"
+  },
+  {
+    "objectID": "slides/quirks.html#types-of-vectors-1",
+    "href": "slides/quirks.html#types-of-vectors-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Types of vectors",
+    "text": "Types of vectors\n\n\n\n\n\n\nYour turn!\n\n\nWhich of the following vectors are ‘atomic’ in R?\n\nRandom numbers\nToday’s date\nA dataset (data.frame)\nA matrix\n\\(\\sqrt{-1}\\) (a complex number)\nNULL"
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-vectors-xi",
+    "href": "slides/quirks.html#subsetting-vectors-xi",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting vectors: x[i]",
+    "text": "Subsetting vectors: x[i]\n\nletters\n\n [1] \"a\" \"b\" \"c\" \"d\" \"e\" \"f\" \"g\" \"h\" \"i\" \"j\" \"k\" \"l\" \"m\" \"n\" \"o\" \"p\" \"q\" \"r\" \"s\"\n[20] \"t\" \"u\" \"v\" \"w\" \"x\" \"y\" \"z\"\n\n# What's the 13th letter?\nletters[13L]\n\n[1] \"m\"\n\n# What's the last letter?\nletters[length(letters)]\n\n[1] \"z\""
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-vectors-xi-1",
+    "href": "slides/quirks.html#subsetting-vectors-xi-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting vectors: x[i]",
+    "text": "Subsetting vectors: x[i]\nRemember: indexing starts at 1!\n\nletters[0L]\n\ncharacter(0)\n\n\n\n\n\n\n\n\n\nNegative indices\n\n\nRemember: R is weird!\n\nletters[-1L]\n\n [1] \"b\" \"c\" \"d\" \"e\" \"f\" \"g\" \"h\" \"i\" \"j\" \"k\" \"l\" \"m\" \"n\" \"o\" \"p\" \"q\" \"r\" \"s\" \"t\"\n[20] \"u\" \"v\" \"w\" \"x\" \"y\" \"z\""
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-vectors-xi-2",
+    "href": "slides/quirks.html#subsetting-vectors-xi-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting vectors: x[i]",
+    "text": "Subsetting vectors: x[i]\n\n# What's the first three letters?\nletters[1:3]\n\n[1] \"a\" \"b\" \"c\"\n\n\n\n\n\n\n\n\n\nSafe sequences\n\n\nUsing 1:n is unsafe in general code. seq_len(n) is safer.\n\n# What's the first 'zero' letters?\nn &lt;- 0\nletters[1:n]\n\n[1] \"a\"\n\nletters[seq_len(n)]\n\ncharacter(0)"
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-vectors-xi-j",
+    "href": "slides/quirks.html#subsetting-vectors-xi-j",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting vectors: x[i, j]",
+    "text": "Subsetting vectors: x[i, j]\nWhen subsetting matrices (or arrays) we use multiple indices.\n\n# Get the first row and third column\nvolcano[1L,3L]\n\n[1] 101\n\n\n\n\n\n\n\n\n\nSubsetting simplification\n\n\nBy default R will simplify matrices/arrays into 1-d vectors.\nIt’s often safer to prevent this with drop = FALSE."
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-vectors-xi-j-1",
+    "href": "slides/quirks.html#subsetting-vectors-xi-j-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting vectors: x[i, j]",
+    "text": "Subsetting vectors: x[i, j]\n\n# What's the first column?\nvolcano[,1L]\n\n [1] 100 101 102 103 104 105 105 106 107 108 109 110 110 111 114 116 118 120 120\n[20] 121 122 122 123 124 123 123 120 118 117 115 114 115 113 111 110 109 108 108\n[39] 107 107 107 108 109 110 111 111 112 113 113 114 115 115 114 113 112 111 111\n[58] 112 112 112 113 114 114 115 115 116 116 117 117 116 114 112 109 106 104 102\n[77] 101 100 100  99  99  99  99  98  98  97  97\n\n# But with keeping the matrix\n# (empty arguments for positioning is also quirky!)\nvolcano[,1L,drop=FALSE]\n\n      [,1]\n [1,]  100\n [2,]  101\n [3,]  102\n [4,]  103\n [5,]  104\n [6,]  105\n [7,]  105\n [8,]  106\n [9,]  107\n[10,]  108\n[11,]  109\n[12,]  110\n[13,]  110\n[14,]  111\n[15,]  114\n[16,]  116\n[17,]  118\n[18,]  120\n[19,]  120\n[20,]  121\n[21,]  122\n[22,]  122\n[23,]  123\n[24,]  124\n[25,]  123\n[26,]  123\n[27,]  120\n[28,]  118\n[29,]  117\n[30,]  115\n[31,]  114\n[32,]  115\n[33,]  113\n[34,]  111\n[35,]  110\n[36,]  109\n[37,]  108\n[38,]  108\n[39,]  107\n[40,]  107\n[41,]  107\n[42,]  108\n[43,]  109\n[44,]  110\n[45,]  111\n[46,]  111\n[47,]  112\n[48,]  113\n[49,]  113\n[50,]  114\n[51,]  115\n[52,]  115\n[53,]  114\n[54,]  113\n[55,]  112\n[56,]  111\n[57,]  111\n[58,]  112\n[59,]  112\n[60,]  112\n[61,]  113\n[62,]  114\n[63,]  114\n[64,]  115\n[65,]  115\n[66,]  116\n[67,]  116\n[68,]  117\n[69,]  117\n[70,]  116\n[71,]  114\n[72,]  112\n[73,]  109\n[74,]  106\n[75,]  104\n[76,]  102\n[77,]  101\n[78,]  100\n[79,]  100\n[80,]   99\n[81,]   99\n[82,]   99\n[83,]   99\n[84,]   98\n[85,]   98\n[86,]   97\n[87,]   97\n\n\n:::"
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-vectors-xi-3",
+    "href": "slides/quirks.html#subsetting-vectors-xi-3",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting vectors: x[[i]]",
+    "text": "Subsetting vectors: x[[i]]\n\n\n\n\n\n\nYour turn!\n\n\nWhat’s the difference between x[i] and x[[i]]?\nThis code gives the same result…\n\nletters[13L]\n\n[1] \"m\"\n\nletters[[13L]]\n\n[1] \"m\""
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-list-vectors-xi",
+    "href": "slides/quirks.html#subsetting-list-vectors-xi",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting (list) vectors: x[[i]]",
+    "text": "Subsetting (list) vectors: x[[i]]\nx[[i]] is used to subset (list) vectors into their element’s type.\nKey differences:\n\nOnly works for single indices i\nDrops the (list) structure of x\n\n\n\n\nOrange[2L]\n\n    age\n1   118\n2   484\n3   664\n4  1004\n5  1231\n6  1372\n7  1582\n8   118\n9   484\n10  664\n11 1004\n12 1231\n13 1372\n14 1582\n15  118\n16  484\n17  664\n18 1004\n19 1231\n20 1372\n21 1582\n22  118\n23  484\n24  664\n25 1004\n26 1231\n27 1372\n28 1582\n29  118\n30  484\n31  664\n32 1004\n33 1231\n34 1372\n35 1582\n\n\n\n\nOrange[[2L]]\n\n [1]  118  484  664 1004 1231 1372 1582  118  484  664 1004 1231 1372 1582  118\n[16]  484  664 1004 1231 1372 1582  118  484  664 1004 1231 1372 1582  118  484\n[31]  664 1004 1231 1372 1582"
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-list-vectors-xcol",
+    "href": "slides/quirks.html#subsetting-list-vectors-xcol",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting (list) vectors: x$col",
+    "text": "Subsetting (list) vectors: x$col\nOften we use the list vector’s names for subsetting.\n\nOrange$age\n\n [1]  118  484  664 1004 1231 1372 1582  118  484  664 1004 1231 1372 1582  118\n[16]  484  664 1004 1231 1372 1582  118  484  664 1004 1231 1372 1582  118  484\n[31]  664 1004 1231 1372 1582\n\n\nThis also works for x[[\"col\"]].\n\nOrange[[\"age\"]]\n\n [1]  118  484  664 1004 1231 1372 1582  118  484  664 1004 1231 1372 1582  118\n[16]  484  664 1004 1231 1372 1582  118  484  664 1004 1231 1372 1582  118  484\n[31]  664 1004 1231 1372 1582"
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-list-vectors-xcol-1",
+    "href": "slides/quirks.html#subsetting-list-vectors-xcol-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting (list) vectors: x$col",
+    "text": "Subsetting (list) vectors: x$col\nOften we use the list vector’s names for subsetting.\n\n\n\n\n\n\nYour turn!\n\n\nWhat happens with the following code?\n\nOrange[\"age\"]\nOrange[\"age\",]\nOrange[,\"age\"]"
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-list-vectors-xcol-2",
+    "href": "slides/quirks.html#subsetting-list-vectors-xcol-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting (list) vectors: x$col",
+    "text": "Subsetting (list) vectors: x$col\n\n\n\n\n\n\nCaution! R’s eager to please.\n\n\nOrange[\"age\",] should probably error, but it doesn’t. There was no rowname called “age”, so it gives a ‘missing’ row.\nWhat does Orange[NA,] do?\nWhat about Orange$a and Orange[[\"a\"]]? What if we also had a column called ‘alpine’?"
+  },
+  {
+    "objectID": "slides/quirks.html#subsetting-list-vectors-xcol-3",
+    "href": "slides/quirks.html#subsetting-list-vectors-xcol-3",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Subsetting (list) vectors: x$col",
+    "text": "Subsetting (list) vectors: x$col\nA tibble is stricter than data.frame (it also looks nicer).\nBy being less ‘helpful’, it is (a bit) safer.\n\n\n\n\n\n\nYour turn!\n\n\nConvert Orange into a tibble with as_tibble(), then try various subsets.\n\nlibrary(dplyr)\norange_trees &lt;- as_tibble(Orange)\norange_trees$a\norange_trees[\"age\",]\norange_trees[NA,]"
+  },
+  {
+    "objectID": "slides/quirks.html#combining-vectors-cx-y",
+    "href": "slides/quirks.html#combining-vectors-cx-y",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Combining vectors: c(x, y)",
+    "text": "Combining vectors: c(x, y)\nVectors are combined with c(), short for ‘combine’.\n\nc(1, 2, 3)\n\n[1] 1 2 3\n\n\n\n\n\n\n\n\nConfusing combinations\n\n\nWhat happens when you combine vectors of different types?\nTry it!"
+  },
+  {
+    "objectID": "slides/quirks.html#combining-vectors-vec_cx-y",
+    "href": "slides/quirks.html#combining-vectors-vec_cx-y",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Combining vectors: vec_c(x, y)",
+    "text": "Combining vectors: vec_c(x, y)\nThe vctrs package makes combining vectors much stricter when you use vec_c().\nThis is used widely in tidyverse packages now, to make data analysis in the tidyverse safer than base R.\n\n\n\n\n\n\nYour turn!\n\n\nUse vec_c() from {vctrs} to combine different vectors.\nWhat works, and what errors (safely)?"
+  },
+  {
+    "objectID": "slides/quirks.html#casting-vectors-as_-vec_cast",
+    "href": "slides/quirks.html#casting-vectors-as_-vec_cast",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Casting vectors: as_*(), vec_cast()",
+    "text": "Casting vectors: as_*(), vec_cast()\nThis vector converting process is known as ‘casting’.\nExplicit casting with as.numeric(), as.Date() or vec_cast() is good practice.\n\n\n\n\n\n\n\nParsing data from text\n\n\nIt is also safer to explicitly specify column types when reading in data.\nThe readr package writes this code for you - just copy it!"
+  },
+  {
+    "objectID": "slides/quirks.html#recycling-vec_recycle",
+    "href": "slides/quirks.html#recycling-vec_recycle",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Recycling: vec_recycle()",
+    "text": "Recycling: vec_recycle()\nWhat happens when you use two vectors of different length?\n\nx &lt;- 1:10\nb &lt;- 2\nb^x\n\n\n\n\n [1]    2    4    8   16   32   64  128  256  512 1024\n\n\n\n\n\n\n\n\nSo helpful!\n\n\nR ‘recycles’ b to be the same length as x.\nThis aspect of R’s vectorisation is great since we don’t need to write a loop."
+  },
+  {
+    "objectID": "slides/quirks.html#recycling-vec_recycle-1",
+    "href": "slides/quirks.html#recycling-vec_recycle-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Recycling: vec_recycle()",
+    "text": "Recycling: vec_recycle()\nWhat if we’re calculating the revenue of fruit sales…\n\nfruit &lt;- c(\"apple\", \"banana\", \"kiwi\")\nsales &lt;- c(10, 3, 8)\nprice &lt;- c(2.99, 4.39)\nsales*price\n\nWarning in sales * price: longer object length is not a multiple of shorter\nobject length\n\n\n[1] 29.90 13.17 23.92\n\n\n\n\n\n\n\n\nReckless recycling\n\n\nR ‘helpfully’ recycles everything, regardless of if their lengths match. At least it warned us something was amiss!"
+  },
+  {
+    "objectID": "slides/quirks.html#recycling-vec_recycle-2",
+    "href": "slides/quirks.html#recycling-vec_recycle-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Recycling: vec_recycle()",
+    "text": "Recycling: vec_recycle()\nIt is safer to only recycle length 1 vectors, which is done in the tidyverse via vec_recycle(). If you’re …\n\nwriting packages recycle safely with vec_recycle().\nundertaking analysis be careful of mismatched vector lengths (using data.frame/tibble helps)\n\n\n\n\n\n\n\nDistribution statistics\n\n\nThe p/d/q/r functions in R are notoriously bad at recycling.\nMy {distributional} package has much safer behaviour."
   },
   {
     "objectID": "index.html#course-overview",
@@ -382,7 +578,7 @@
     "href": "index.html#required-software",
     "title": "Advanced R Tips and Tricks",
     "section": "Required software",
-    "text": "Required software\nTo be able to complete the exercises of this workshop, please install a suitable IDE (such as RStudio), a recent version of R (4.1+) and the following packages.\n\nR developer packages\n\nrlang\nvctrs\npryr\nlobstr\n\n\nThe following code will install the main packages needed for the workshop.\ninstall.packages(c(\"rlang\", \"vctrs\", \"pryr\", \"lobstr))\nPlease have the required software installed and pre-work completed before attending the workshop."
+    "text": "Required software\nTo be able to complete the exercises of this workshop, please install a suitable IDE (such as RStudio), a recent version of R (4.1+) and the following packages.\n\nData analysis packages\n\ndplyr\npurrr\n\nDeveloper packages\n\nrlang\nvctrs\npryr\nlobstr\n\n\nThe following code will install the main packages needed for the workshop.\ninstall.packages(c(\"dplyr\", \"purrr\", \"rlang\", \"vctrs\", \"pryr\", \"lobstr))\nPlease have the required software installed and pre-work completed before attending the workshop."
   },
   {
     "objectID": "index.html#footnotes",
@@ -406,24 +602,325 @@
     "text": "This work is licensed under a Creative Commons Attribution 4.0 International License."
   },
   {
-    "objectID": "slides/vectors/index.html#section",
-    "href": "slides/vectors/index.html#section",
-    "title": "Advanced R Tips and Tricks",
-    "section": "",
-    "text": "Advanced R  Tips and Tricks\n\n\nVectorisation\n\n\n22nd October 2024 @ WOMBAT\n\nMitchell O’Hara-Wild, Nectric\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
+    "objectID": "slides/functional.html#outline",
+    "href": "slides/functional.html#outline",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Outline",
+    "text": "Outline"
   },
   {
-    "objectID": "slides/vectors/index.html#after-the-break",
-    "href": "slides/vectors/index.html#after-the-break",
-    "title": "Advanced R Tips and Tricks",
-    "section": "After the break…",
-    "text": "After the break…\n\n\n\n\n\n\n\n\nLearn more advanced R tricks\n\n\n\nAdvanced R 2nd edition textbook\n\nFreely available online! https://adv-r.hadley.nz/\n\n\n\n\n\n\n\n\n\nI appreciate your feedback\n\n\nShort feedback form: https://feedback.nectric.com.au/pZ26\n\n\n\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n workshop.nectric.com.au/advr-wombat24/\n mitchelloharawild/workshop-advr-wombat24"
+    "objectID": "slides/functional.html#functional-programming-1",
+    "href": "slides/functional.html#functional-programming-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functional programming",
+    "text": "Functional programming\nR is commonly considered a ‘functional’ programming language - and so far we have used functional programming.\n\nsquare &lt;- function(x) {\n  return(x^2)\n}\nsquare(8)\n\n[1] 64\n\n\nThe square function is an object like any other in R."
   },
   {
-    "objectID": "slides/vectors/index.html#unsplash-credits",
-    "href": "slides/vectors/index.html#unsplash-credits",
-    "title": "Advanced R Tips and Tricks",
-    "section": "Unsplash credits",
-    "text": "Unsplash credits\n\n\n\n\n\n\n\nThanks to these Unsplash contributors for their photos\n\n\n\n\n\nSander Weeteling: Photo\nKasia Gajek: Photo\nNASA: United States seen from orbit\nBalint Mendlik: Photo\nSander Weeteling: Photo"
+    "objectID": "slides/functional.html#some-programming-paradigms-in-r",
+    "href": "slides/functional.html#some-programming-paradigms-in-r",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Some programming paradigms in R",
+    "text": "Some programming paradigms in R\n\n\n\nNote\n\n\nFunctional programming\n\nFunctions are created and used like any other object.\nOutput should only depend on the function’s inputs.\n\n\n\n\n\n\n\n\nNote\n\n\nObject-oriented programming\n\nFunctions are associated with object types.\nMethods of the same ‘function’ produce object-specific output."
+  },
+  {
+    "objectID": "slides/functional.html#some-programming-paradigms-in-r-1",
+    "href": "slides/functional.html#some-programming-paradigms-in-r-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Some programming paradigms in R",
+    "text": "Some programming paradigms in R\n\n\n\nNote\n\n\nLiterate programming\n\nNatural language is interspersed with code.\nAimed at prioritising documentation/comments.\nNow used to create reproducible reports/documents.\n\n\n\n\n\n\n\n\nNote\n\n\nReactive programming\n\nObjects are expressed using code based on inputs.\nWhen inputs change, the object’s value updates."
+  },
+  {
+    "objectID": "slides/functional.html#functions-are-objects",
+    "href": "slides/functional.html#functions-are-objects",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functions are objects",
+    "text": "Functions are objects\nR functions can be printed,\n\nprint(square)\n\nfunction(x) {\n  return(x^2)\n}\n\n\n\ninspected,\n\nformals(square)\n\n$x"
+  },
+  {
+    "objectID": "slides/functional.html#functions-are-objects-1",
+    "href": "slides/functional.html#functions-are-objects-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functions are objects",
+    "text": "Functions are objects\nput in a list,\n\nmy_functions &lt;- list(square, sum, min, max)\nmy_functions\n\n[[1]]\nfunction(x) {\n  return(x^2)\n}\n\n[[2]]\nfunction (..., na.rm = FALSE)  .Primitive(\"sum\")\n\n[[3]]\nfunction (..., na.rm = FALSE)  .Primitive(\"min\")\n\n[[4]]\nfunction (..., na.rm = FALSE)  .Primitive(\"max\")"
+  },
+  {
+    "objectID": "slides/functional.html#functions-are-objects-2",
+    "href": "slides/functional.html#functions-are-objects-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functions are objects",
+    "text": "Functions are objects\nused within lists,\n\nmy_functions[[1]](8)\n\n[1] 64\n\n\n\nbut they can’t be subsetted!\n\nsquare$x\n\nError in square$x: object of type 'closure' is not subsettable"
+  },
+  {
+    "objectID": "slides/functional.html#handling-input-types",
+    "href": "slides/functional.html#handling-input-types",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Handling input types",
+    "text": "Handling input types\nFunctional programming handles different input types using control flow. The same code is ran regardless of object type.\n\nsquare &lt;- function(x) {\n  if(!is.numeric(x)) {\n    stop(\"`x` needs to be numeric\")\n  }\n  return(x^2)\n}"
+  },
+  {
+    "objectID": "slides/functional.html#what-are-functions",
+    "href": "slides/functional.html#what-are-functions",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "What are functions?",
+    "text": "What are functions?\nA function is comprised of three components:\n\nThe arguments/inputs (formals())\nThe body/code (body())\nThe environment (environment())\n\n\n\n\n\n\n\n\n\nYour turn!\n\n\nUse these functions to take a closer look at square().\nTry modifying the function’s formals/body/env with &lt;-."
+  },
+  {
+    "objectID": "slides/functional.html#functional-programming-2",
+    "href": "slides/functional.html#functional-programming-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functional programming",
+    "text": "Functional programming\nSince functions are like any other object, they can also be:\n\ninputs to functions\n\n\n\n\n\n\n\n\nExtensible design with function inputs\n\n\nUsing function inputs can improve your package’s design!\nRather than limiting users to a few specific methods, allow them to use and write any method with functions."
+  },
+  {
+    "objectID": "slides/functional.html#function-arguments",
+    "href": "slides/functional.html#function-arguments",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Function arguments",
+    "text": "Function arguments\nConsider a function which calculates accuracy measures:\n\naccuracy &lt;- function(e, measure, ...) {\n  if (measure == \"mae\") {\n    mean(abs(e), ...)\n  } else if (measure == \"rmse\") {\n    sqrt(mean(e^2, ...))\n  } else {\n    stop(\"Unknown accuracy measure\")\n  }\n}\n\n\n\n\n\n\n\n\nImproving the design\n\n\nThis function is limited to only computing MAE and RMSE."
+  },
+  {
+    "objectID": "slides/functional.html#function-arguments-1",
+    "href": "slides/functional.html#function-arguments-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Function arguments",
+    "text": "Function arguments\nUsing function operators allows any measure to be used.\n\nMAE &lt;- function(e, ...) mean(abs(e), ...)\nRMSE &lt;- function(e, ...) sqrt(mean(e^2, ...))\naccuracy &lt;- function(e, measure, ...) {\n  ???\n}\naccuracy(rnorm(100), measure = RMSE)\n\n\n\n\n\n\n\n\nYour turn!\n\n\nComplete the accuracy function to calculate accuracy statistics based on the function passed in to measure."
+  },
+  {
+    "objectID": "slides/functional.html#functional-programming-3",
+    "href": "slides/functional.html#functional-programming-3",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functional programming",
+    "text": "Functional programming\nSince functions are like any other object, they can also be:\n\ninputs to functions\noutputs of functions\n\n\n\n\n\n\n\n\nFunctions making functions?\n\n\nThese functions are known as function factories.\nWhere have you seen a function that creates a function?"
+  },
+  {
+    "objectID": "slides/functional.html#function-factories",
+    "href": "slides/functional.html#function-factories",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Function factories",
+    "text": "Function factories\nLet’s generalise square() to raise numbers to any power.\n\npower &lt;- function(x, exp) {\n  x^exp\n}\npower(8, exp = 2)\n\n[1] 64\n\npower(8, exp = 3)\n\n[1] 512\n\n\n\n\n\n\n\n\n\nStarting a factory\n\n\nWhat if the function returned a function instead?"
+  },
+  {
+    "objectID": "slides/functional.html#function-factories-1",
+    "href": "slides/functional.html#function-factories-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Function factories",
+    "text": "Function factories\n\npower_factory &lt;- function(exp) {\n  # R is lazy and won't look at exp unless we ask it to\n  force(exp)\n  # Return a function, which finds exp from this environment\n  function(x) {\n    x^exp\n  }\n}\nsquare &lt;- power_factory(exp = 2)\nsquare(8)\n\n[1] 64\n\n\n\n\ncube &lt;- power_factory(exp = 3)\ncube(8)\n\n[1] 512"
+  },
+  {
+    "objectID": "slides/functional.html#function-factories-2",
+    "href": "slides/functional.html#function-factories-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Function factories",
+    "text": "Function factories\nConsider this function to calculate plot breakpoints of vectors.\n\nbreakpoints &lt;- function(x, n.breaks) {\n  seq(min(x), max(x), length.out = n.breaks)\n}\n\n\n\n\n\n\n\n\nYour turn!\n\n\nConvert this function into a function factory.\nIs it better to create functions via x or n.breaks?"
+  },
+  {
+    "objectID": "slides/functional.html#split-apply-combine",
+    "href": "slides/functional.html#split-apply-combine",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Split, apply, combine",
+    "text": "Split, apply, combine\nMany problems can be simplified/solved using this process:\n\nsplit (break the problem into smaller parts)\napply (solve the smaller problems)\ncombine (join solved parts to solve original problem)\n\n\nThis technique applies to both\n\nwriting functions (rewriting a function into sub-functions)\nworking with data (same function across groups or files)"
+  },
+  {
+    "objectID": "slides/functional.html#data-group_by-summarise",
+    "href": "slides/functional.html#data-group_by-summarise",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "data |> group_by() |> summarise()",
+    "text": "data |&gt; group_by() |&gt; summarise()\nAn example of split-apply-combine being used to work with data is when group_by() and summarise() are used together.\n\n\nsplit: group_by() splits up the data into groups\napply: your summarise() code calculates a single value\ncombine: summarise() combines the results into a vector\n\n\n\n\n\n\nlibrary(dplyr)\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarise(mean(mpg))\n\n\n\n\n# A tibble: 3 x 2\n    cyl `mean(mpg)`\n  &lt;dbl&gt;       &lt;dbl&gt;\n1     4        26.7\n2     6        19.7\n3     8        15.1"
+  },
+  {
+    "objectID": "slides/functional.html#split-apply-combine-for-vectors-and-lists",
+    "href": "slides/functional.html#split-apply-combine-for-vectors-and-lists",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Split-apply-combine for vectors and lists",
+    "text": "Split-apply-combine for vectors and lists\nThe same idea can be used for calculations on vectors.\n\nThere are two main implementations we consider:\n\nbase R: The *apply() functions\npurrr: The map*() functions\n\n\n\nWe will use purrr and but I’ll also share the base R equivalent."
+  },
+  {
+    "objectID": "slides/functional.html#for-or-map",
+    "href": "slides/functional.html#for-or-map",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "for or map?",
+    "text": "for or map?\nLet’s square() a vector of numbers with a for loop.\n\nx &lt;- c(1, 3, 8)\nx2 &lt;- numeric(length(x))\nfor (i in seq_along(x)) {\n  x2[i] &lt;- square(x[i])\n}\nx2\n\n[1]  1  9 64\n\n\n\n\n\n\n\n\n\n\nVectorisation?\n\n\nOf course square() is vectorised, so we should use square(x). Other functions like lm() or read.csv() are not!"
+  },
+  {
+    "objectID": "slides/functional.html#for-or-map-1",
+    "href": "slides/functional.html#for-or-map-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "for or map?",
+    "text": "for or map?\nInstead using map() we get…\n\nlibrary(purrr)\nx &lt;- c(1, 3, 8)\nmap(x, square) # lapply(x, square)\n\n[[1]]\n[1] 1\n\n[[2]]\n[1] 9\n\n[[3]]\n[1] 64"
+  },
+  {
+    "objectID": "slides/functional.html#mapping-vectors",
+    "href": "slides/functional.html#mapping-vectors",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping vectors",
+    "text": "Mapping vectors\nThe same result, but it has been combined differently!"
+  },
+  {
+    "objectID": "slides/functional.html#mapping-vectors-1",
+    "href": "slides/functional.html#mapping-vectors-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping vectors",
+    "text": "Mapping vectors\nTo combine the results into a vector rather than a list, we instead use map_vec() to combine results into a vector.\n\nlibrary(purrr)\nx &lt;- c(1, 3, 8)\nmap_vec(x, square) # vapply(x, square, numeric(1L))\n\n[1]  1  9 64"
+  },
+  {
+    "objectID": "slides/functional.html#for-or-map-2",
+    "href": "slides/functional.html#for-or-map-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "for or map",
+    "text": "for or map\n\n\n\n\n\n\n\nAdvantages of map\n\n\n\nLess coding (less bugs!)\nEasier to read and understand.\n\n\n\n\n\n\n\n\n\n\n\n\n\nDisadvantages of map\n\n\n\nLess control over loop\nCannot solve sequential problems"
+  },
+  {
+    "objectID": "slides/functional.html#functional-mapping",
+    "href": "slides/functional.html#functional-mapping",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functional mapping",
+    "text": "Functional mapping\nRecall group_by() and summarise() from dplyr:\n\nmtcars |&gt;\n  group_by(cyl) |&gt;\n  summarise(mean(mpg))\n\n\n\n\n\n\n\n\nYour turn!\n\n\nUse split() and map_vec() to achieve a similar result.\nHint: split(mtcars$mpg, mtcars$cyl) creates a list that splits mtcars$mpg by each value of mtcars$cyl."
+  },
+  {
+    "objectID": "slides/functional.html#anonymous-mapper-functions",
+    "href": "slides/functional.html#anonymous-mapper-functions",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Anonymous mapper functions",
+    "text": "Anonymous mapper functions\n\nSuppose we want to separately model mpg for each cyl.\n\nlm(mpg ~ disp + hp + drat + wt, mtcars[mtcars$cyl == 4,])\nlm(mpg ~ disp + hp + drat + wt, mtcars[mtcars$cyl == 6,])\nlm(mpg ~ disp + hp + drat + wt, mtcars[mtcars$cyl == 8,])"
+  },
+  {
+    "objectID": "slides/functional.html#anonymous-mapper-functions-1",
+    "href": "slides/functional.html#anonymous-mapper-functions-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Anonymous mapper functions",
+    "text": "Anonymous mapper functions\nWe can split the data by cyl with split(),\n\nmtcars_cyl &lt;- split(mtcars, mtcars$cyl)\n\nbut map(mtcars_cyl, lm, mpg ~ disp + hp + drat + wt) won’t work - why?\n\n\n\n\n\n\n\n\nDifficult to map\n\n\nUsing map(mtcars_cyl, lm) will apply lm(mtcars_cyl[i]).\nThe mapped vector is always used as the first argument!"
+  },
+  {
+    "objectID": "slides/functional.html#anonymous-mapper-functions-2",
+    "href": "slides/functional.html#anonymous-mapper-functions-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Anonymous mapper functions",
+    "text": "Anonymous mapper functions\nWe can write our own functions!\n\nmtcars_lm &lt;- function(.) lm(mpg ~ disp + hp + drat + wt, data = .)\nmap(mtcars_cyl, mtcars_lm)\n\n$`4`\n\nCall:\nlm(formula = mpg ~ disp + hp + drat + wt, data = .)\n\nCoefficients:\n(Intercept)         disp           hp         drat           wt  \n   52.51953     -0.06294     -0.07602     -1.44216     -3.10007  \n\n\n$`6`\n\nCall:\nlm(formula = mpg ~ disp + hp + drat + wt, data = .)\n\nCoefficients:\n(Intercept)         disp           hp         drat           wt  \n  15.123279     0.043635     0.002516     2.431884    -3.980263  \n\n\n$`8`\n\nCall:\nlm(formula = mpg ~ disp + hp + drat + wt, data = .)\n\nCoefficients:\n(Intercept)         disp           hp         drat           wt  \n  2.679e+01    6.585e-05   -1.346e-02   -4.531e-02   -2.189e+00"
+  },
+  {
+    "objectID": "slides/functional.html#anonymous-mapper-functions-3",
+    "href": "slides/functional.html#anonymous-mapper-functions-3",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Anonymous mapper functions",
+    "text": "Anonymous mapper functions\nOr use ~ body to create anonymous functions.\n\n# lapply(mtcars_cyl, \\(.) lm(mpg ~ disp + hp + drat + wt, data = .))\nmap(mtcars_cyl, ~ lm(mpg ~ disp + hp + drat + wt, data = .))\n\n$`4`\n\nCall:\nlm(formula = mpg ~ disp + hp + drat + wt, data = .)\n\nCoefficients:\n(Intercept)         disp           hp         drat           wt  \n   52.51953     -0.06294     -0.07602     -1.44216     -3.10007  \n\n\n$`6`\n\nCall:\nlm(formula = mpg ~ disp + hp + drat + wt, data = .)\n\nCoefficients:\n(Intercept)         disp           hp         drat           wt  \n  15.123279     0.043635     0.002516     2.431884    -3.980263  \n\n\n$`8`\n\nCall:\nlm(formula = mpg ~ disp + hp + drat + wt, data = .)\n\nCoefficients:\n(Intercept)         disp           hp         drat           wt  \n  2.679e+01    6.585e-05   -1.346e-02   -4.531e-02   -2.189e+00"
+  },
+  {
+    "objectID": "slides/functional.html#mapping-mapping-mapping",
+    "href": "slides/functional.html#mapping-mapping-mapping",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping mapping mapping",
+    "text": "Mapping mapping mapping\nHow would you then get the coefficients from all 3 models?\n\n# mtcars_cyl |&gt; lapply(\\(.) lm(mpg ~ disp + hp + drat + wt, data = .))\nmtcars_cyl |&gt;\n  map(~ lm(mpg ~ disp + hp + drat + wt, data = .))\n\n\n\n\n\n\n\n\n\nSolution\n\n\n\n# lapply(mtcars_cyl, \\(.) lm(mpg ~ disp + hp + drat + wt, data = .))\nmtcars_cyl |&gt;\n  map(~ lm(mpg ~ disp + hp + drat + wt, data = .)) |&gt;\n  map(coef)\n\n$`4`\n(Intercept)        disp          hp        drat          wt \n52.51952502 -0.06293845 -0.07601929 -1.44215918 -3.10006904 \n\n$`6`\n (Intercept)         disp           hp         drat           wt \n15.123278848  0.043634767  0.002516317  2.431883903 -3.980262995 \n\n$`8`\n  (Intercept)          disp            hp          drat            wt \n 2.679295e+01  6.585329e-05 -1.345896e-02 -4.530536e-02 -2.188954e+00"
+  },
+  {
+    "objectID": "slides/functional.html#mapping-arguments",
+    "href": "slides/functional.html#mapping-arguments",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping arguments",
+    "text": "Mapping arguments\nAny arguments after your function are passed to all functions."
+  },
+  {
+    "objectID": "slides/functional.html#mapping-arguments-1",
+    "href": "slides/functional.html#mapping-arguments-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping arguments",
+    "text": "Mapping arguments\nThis works by passing through ... to the function.\n\nx &lt;- list(1:5, c(1:10, NA))\nmap_dbl(x, ~ mean(.x, na.rm = TRUE))\n\n[1] 3.0 5.5\n\nmap_dbl(x, mean, na.rm = TRUE)\n\n[1] 3.0 5.5"
+  },
+  {
+    "objectID": "slides/functional.html#mapping-arguments-2",
+    "href": "slides/functional.html#mapping-arguments-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping arguments",
+    "text": "Mapping arguments\nThese additional arguments are not decomposed / mapped."
+  },
+  {
+    "objectID": "slides/functional.html#mapping-multiple-arguments",
+    "href": "slides/functional.html#mapping-multiple-arguments",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping multiple arguments",
+    "text": "Mapping multiple arguments\nIt is often useful to map multiple arguments."
+  },
+  {
+    "objectID": "slides/functional.html#mapping-multiple-arguments-1",
+    "href": "slides/functional.html#mapping-multiple-arguments-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping multiple arguments",
+    "text": "Mapping multiple arguments\n\nxs &lt;- map(1:8, ~ ifelse(runif(10) &gt; 0.8, NA, runif(10)))\nmap_vec(xs, mean, na.rm = TRUE)\n\n[1] 0.6265086 0.3777149 0.5029521 0.5544291 0.6012415 0.3546601 0.4074117\n[8] 0.3636381\n\n\n\n\nws &lt;- map(1:8, ~ rpois(10, 5) + 1)\nmap2_vec(xs, ws, weighted.mean, na.rm = TRUE)\n\n[1] 0.5966812 0.4204363 0.5155412 0.5262331 0.6364686 0.3293404 0.4246389\n[8] 0.3796906"
+  },
+  {
+    "objectID": "slides/functional.html#mapping-multiple-arguments-2",
+    "href": "slides/functional.html#mapping-multiple-arguments-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping multiple arguments",
+    "text": "Mapping multiple arguments"
+  },
+  {
+    "objectID": "slides/functional.html#mapping-many-arguments",
+    "href": "slides/functional.html#mapping-many-arguments",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping many arguments",
+    "text": "Mapping many arguments\nIt is also possible to map any number of inputs with pmap.\n\nn &lt;- 1:3\nmin &lt;- c(0, 10, 100)\nmax &lt;- c(1, 100, 1000)\npmap(list(n, min, max), runif) # .mapply(runif, list(n, min, max), list())\n\n[[1]]\n[1] 0.9294743\n\n[[2]]\n[1] 26.64182 37.69824\n\n[[3]]\n[1] 472.1354 188.6201 993.4126"
+  },
+  {
+    "objectID": "slides/functional.html#mapping-many-arguments-1",
+    "href": "slides/functional.html#mapping-many-arguments-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Mapping many arguments",
+    "text": "Mapping many arguments"
+  },
+  {
+    "objectID": "slides/functional.html#parallel-mapping",
+    "href": "slides/functional.html#parallel-mapping",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Parallel mapping",
+    "text": "Parallel mapping\nSplit-apply-combine problems are embarrassingly parallel.\n\nThe furrr package (future + purrr) makes it easy to use map() in parallel, providing future_map() variants.\n\nlibrary(furrr)\nplan(multisession, workers = 4)\nfuture_map_dbl(xs, mean, na.rm = TRUE)\n\n[1] 0.6265086 0.3777149 0.5029521 0.5544291 0.6012415 0.3546601 0.4074117\n[8] 0.3636381\n\nfuture_map2_dbl(xs, ws, weighted.mean, na.rm = TRUE)\n\n[1] 0.5966812 0.4204363 0.5155412 0.5262331 0.6364686 0.3293404 0.4246389\n[8] 0.3796906"
+  },
+  {
+    "objectID": "slides/functional.html#reduce-vectors-to-single-values",
+    "href": "slides/functional.html#reduce-vectors-to-single-values",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Reduce vectors to single values",
+    "text": "Reduce vectors to single values\nSometimes you want to collapse a vector, reducing it to a single value. reduce() always returns a vector of length 1.\n\nx &lt;- sample(1:100, 10)\nx\n\n [1] 12  2 39 88 61 49 20 10 53 94\n\nsum(x)\n\n[1] 428\n\n# Alternative to sum()\nreduce(x, `+`) # Reduce(`+`, x)\n\n[1] 428"
+  },
+  {
+    "objectID": "slides/functional.html#reduce-vectors-to-single-values-1",
+    "href": "slides/functional.html#reduce-vectors-to-single-values-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Reduce vectors to single values",
+    "text": "Reduce vectors to single values\nThe result from the function is re-used as the first argument."
+  },
+  {
+    "objectID": "slides/functional.html#reduce-vectors-to-single-values-2",
+    "href": "slides/functional.html#reduce-vectors-to-single-values-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Reduce vectors to single values",
+    "text": "Reduce vectors to single values\n\n\n\n\n\n\n\nYour turn!\n\n\nWe’re studying the letters in 3 bowls of alphabet soup."
+  },
+  {
+    "objectID": "slides/functional.html#reduce-vectors-to-single-values-3",
+    "href": "slides/functional.html#reduce-vectors-to-single-values-3",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Reduce vectors to single values",
+    "text": "Reduce vectors to single values\n\n\n\n\n\n\nCaution\n\n\nYour turn!\nWe’re studying the letters in 3 bowls of alphabet soup.\nUse reduce() to find the letters were in all bowls of soup!\nAre all letters found in the soups?\n\nalphabet_soup &lt;- map(c(10,24,13), sample, x=letters, replace=TRUE)\nalphabet_soup\n\n[[1]]\n [1] \"j\" \"m\" \"y\" \"g\" \"m\" \"k\" \"r\" \"l\" \"s\" \"h\"\n\n[[2]]\n [1] \"c\" \"w\" \"m\" \"i\" \"g\" \"k\" \"k\" \"i\" \"n\" \"p\" \"a\" \"v\" \"b\" \"n\" \"e\" \"o\" \"y\" \"u\" \"y\"\n[20] \"g\" \"x\" \"s\" \"x\" \"y\"\n\n[[3]]\n [1] \"f\" \"g\" \"g\" \"i\" \"g\" \"q\" \"a\" \"o\" \"a\" \"b\" \"g\" \"n\" \"b\""
+  },
+  {
+    "objectID": "slides/functional.html#functional-adverbs",
+    "href": "slides/functional.html#functional-adverbs",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functional adverbs",
+    "text": "Functional adverbs\npurrr also offers many adverbs, which modify a function.\n\n\n\nNote\n\n\nCapturing conditions\n\npossibly(.f, otherwise): If the function errors, it will return otherwise instead.\nsafely(.f): The function now returns a list with ‘result’ and ‘error’, preventing errors.\nquietly(.f): Any conditions (messages, warnings, printed output) are now captured into a list."
+  },
+  {
+    "objectID": "slides/functional.html#functional-adverbs-1",
+    "href": "slides/functional.html#functional-adverbs-1",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functional adverbs",
+    "text": "Functional adverbs\npurrr also offers many adverbs, which modify a function.\n\n\n\nNote\n\n\nCapturing conditions\n\nnegate(.f) will return !result.\n\n\n\n\n\n\n\nNote\n\n\nChaining functions\n\ncompose(...) will chain functions together like a chain of piped functions."
+  },
+  {
+    "objectID": "slides/functional.html#functional-adverbs-2",
+    "href": "slides/functional.html#functional-adverbs-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functional adverbs",
+    "text": "Functional adverbs\npurrr also offers many adverbs, which modify a function.\n\n\n\n\n\n\n\nFunctions modifying functions?\n\n\nThese functions are all function factories!\nMore specifically they are known as function operators since both the input and output is a function.\nmemoise::memoise() is also a function operator."
   }
 ]
