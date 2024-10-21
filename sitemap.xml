@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://workshop.nectric.com.au/advr-wombat24/slides/quirks/index.html</loc>
-    <lastmod>2024-09-14T10:47:35.089Z</lastmod>
+    <loc>https://workshop.nectric.com.au/advr-wombat24/slides/metaprogramming/index.html</loc>
+    <lastmod>2024-10-20T12:38:29.102Z</lastmod>
   </url>
   <url>
-    <loc>https://workshop.nectric.com.au/advr-wombat24/license.html</loc>
-    <lastmod>2024-09-14T10:47:35.093Z</lastmod>
+    <loc>https://workshop.nectric.com.au/advr-wombat24/slides/quirks/index.html</loc>
+    <lastmod>2024-10-20T12:17:38.210Z</lastmod>
+  </url>
+  <url>
+    <loc>https://workshop.nectric.com.au/advr-wombat24/index.html</loc>
+    <lastmod>2024-10-21T02:24:48.752Z</lastmod>
   </url>
   <url>
     <loc>https://workshop.nectric.com.au/advr-wombat24/exercises.html</loc>
     <lastmod>2024-09-14T10:47:35.093Z</lastmod>
   </url>
   <url>
-    <loc>https://workshop.nectric.com.au/advr-wombat24/index.html</loc>
-    <lastmod>2024-09-14T10:49:22.675Z</lastmod>
+    <loc>https://workshop.nectric.com.au/advr-wombat24/license.html</loc>
+    <lastmod>2024-09-14T10:47:35.093Z</lastmod>
   </url>
   <url>
-    <loc>https://workshop.nectric.com.au/advr-wombat24/slides/metaprogramming/index.html</loc>
-    <lastmod>2024-09-14T10:47:35.089Z</lastmod>
+    <loc>https://workshop.nectric.com.au/advr-wombat24/slides/vectors/index.html</loc>
+    <lastmod>2024-10-20T12:17:59.066Z</lastmod>
   </url>
 </urlset>
