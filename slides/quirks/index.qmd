@@ -30,7 +30,7 @@ library(rlang)
 ::: {.column width="60%"}
 
 ::: {.title data-id="title"}
-Advanced R Tips and Tricks
+Advanced R <br> Tips and Tricks
 :::
 
 ::: {.subtitle data-id="subtitle"}
@@ -59,6 +59,103 @@ Quirky R
 :::
 
 ![](../backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left}
+
+## {}
+
+
+::: columns
+::: {.column width="60%"}
+
+::: {.callout}
+## :dart: Today's goals
+
+1. Learn about time series data.
+2. Visualise common time series patterns.
+3. Produce forecasts from a statistical models.
+4. Evaluate the forecasting accuracy.
+:::
+
+::: {.callout .fragment}
+## :sunflower: Expectations
+
+1. Follow the code of conduct.
+2. Ask relevant questions any time, Q&A during breaks.
+3. Be kind and respectful.
+4. Make mistakes and learn!
+:::
+
+[<https://workshop.nectric.com.au/user2024/>]{.fragment}
+
+:::
+:::
+
+![](../backgrounds/balint-mendlik-4-ORHffEh3I-unsplash.jpg){.image-right}
+
+## {}
+
+::: columns
+::: {.column width="35%"}
+
+### Mitchell O'Hara‑Wild
+
+#### Monash + Nectric
+
+[![](resources/github.svg){.icon} @mitchelloharawild](https://github.com/mitchelloharawild)
+
+[![](resources/linkedin.svg){.icon} @mitchelloharawild](https://www.linkedin.com/in/mitchelloharawild/)
+
+
+:::
+
+::: {.column width="65%"}
+
+### Welcome, who am I?
+
+- :mortar_board: PhD candidate at Monash University
+- :bar_chart: Data consulting and workshops at Nectric
+- :chart_with_upwards_trend: Specialised in time series analysis
+- :package: Develops R packages (**fable**, vitae, etc.)
+- :robot: DIYs IoT devices for home automation
+- :seedling: Permaculturist (:bee:, :hatching_chick:, :mushroom:, :sun_with_face:)
+
+:::
+:::
+
+![](../backgrounds/john-fowler-RsRTIofe0HE-unsplash.jpg){.image-left}
+
+## {}
+
+
+
+::: columns
+::: {.column width="35%"}
+
+### You!
+
+#### UseR! attendee
+
+:::
+
+::: {.column width="65%"}
+
+### :raising_hand: Hi, who are you?
+
+Hands up if...
+
+::: {.incremental}
+* :technologist: You've used R
+* :bar_chart: You've analysed data
+* :bubbles: Used tidyverse packages (dplyr, ggplot2...)
+* :chart_with_upwards_trend: You've worked with time series data before
+* :crystal_ball: You've produced a forecast before
+* :star_struck: You've used fable!
+:::
+
+:::
+:::
+
+![](../backgrounds/john-fowler-RsRTIofe0HE-unsplash.jpg){.image-left}
+
 
 ## After the break...
 
