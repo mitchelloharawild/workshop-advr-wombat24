@@ -116,7 +116,7 @@
     "href": "slides/metaprogramming.html#code-evaluation",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Code evaluation",
-    "text": "Code evaluation\n\n\n\nNote\n\n\nStandard evaluation\n\nThe code and environment is unchanged.\nThe result is evaluated as expected.\n\n\n\n\n\n\n\n\nNote\n\n\nNon-standard evaluation (NSE)\n\nThe code and/or the environment is changed.\nLeading to the evaluated result changing."
+    "text": "Code evaluation\n\n\n\nStandard evaluation\n\n\n\nThe code and environment is unchanged.\nThe result is evaluated as expected.\n\n\n\n\n\n\n\n\nNon-standard evaluation (NSE)\n\n\n\nThe code and/or the environment is changed.\nLeading to the evaluated result changing."
   },
   {
     "objectID": "slides/metaprogramming.html#standard-or-non-standard-evaluation",
@@ -907,21 +907,21 @@
     "href": "slides/functional.html#reduce-vectors-to-single-values-3",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Reduce vectors to single values",
-    "text": "Reduce vectors to single values\n\n\n\n\n\n\nCaution\n\n\nYour turn!\nWe’re studying the letters in 3 bowls of alphabet soup.\nUse reduce() to find the letters were in all bowls of soup!\nAre all letters found in the soups?\n\nalphabet_soup &lt;- map(c(10,24,13), sample, x=letters, replace=TRUE)\nalphabet_soup\n\n[[1]]\n [1] \"j\" \"m\" \"y\" \"g\" \"m\" \"k\" \"r\" \"l\" \"s\" \"h\"\n\n[[2]]\n [1] \"c\" \"w\" \"m\" \"i\" \"g\" \"k\" \"k\" \"i\" \"n\" \"p\" \"a\" \"v\" \"b\" \"n\" \"e\" \"o\" \"y\" \"u\" \"y\"\n[20] \"g\" \"x\" \"s\" \"x\" \"y\"\n\n[[3]]\n [1] \"f\" \"g\" \"g\" \"i\" \"g\" \"q\" \"a\" \"o\" \"a\" \"b\" \"g\" \"n\" \"b\""
+    "text": "Reduce vectors to single values\n\n\n\n\n\n\nYour turn!\n\n\nWe’re studying the letters in 3 bowls of alphabet soup.\nUse reduce() to find the letters were in all bowls of soup!\nAre all letters found in the soups?\n\nalphabet_soup &lt;- map(c(10,24,13), sample, x=letters, replace=TRUE)\nalphabet_soup\n\n[[1]]\n [1] \"j\" \"m\" \"y\" \"g\" \"m\" \"k\" \"r\" \"l\" \"s\" \"h\"\n\n[[2]]\n [1] \"c\" \"w\" \"m\" \"i\" \"g\" \"k\" \"k\" \"i\" \"n\" \"p\" \"a\" \"v\" \"b\" \"n\" \"e\" \"o\" \"y\" \"u\" \"y\"\n[20] \"g\" \"x\" \"s\" \"x\" \"y\"\n\n[[3]]\n [1] \"f\" \"g\" \"g\" \"i\" \"g\" \"q\" \"a\" \"o\" \"a\" \"b\" \"g\" \"n\" \"b\""
   },
   {
     "objectID": "slides/functional.html#functional-adverbs",
     "href": "slides/functional.html#functional-adverbs",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Functional adverbs",
-    "text": "Functional adverbs\npurrr also offers many adverbs, which modify a function.\n\n\n\nNote\n\n\nCapturing conditions\n\npossibly(.f, otherwise): If the function errors, it will return otherwise instead.\nsafely(.f): The function now returns a list with ‘result’ and ‘error’, preventing errors.\nquietly(.f): Any conditions (messages, warnings, printed output) are now captured into a list."
+    "text": "Functional adverbs\npurrr also offers many adverbs, which modify a function.\n\n\n\nCapturing conditions\n\n\n\npossibly(.f, otherwise): If the function errors, it will return otherwise instead.\nsafely(.f): The function now returns a list with ‘result’ and ‘error’, preventing errors.\nquietly(.f): Any conditions (messages, warnings, printed output) are now captured into a list."
   },
   {
     "objectID": "slides/functional.html#functional-adverbs-1",
     "href": "slides/functional.html#functional-adverbs-1",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Functional adverbs",
-    "text": "Functional adverbs\npurrr also offers many adverbs, which modify a function.\n\n\n\nNote\n\n\nCapturing conditions\n\nnegate(.f) will return !result.\n\n\n\n\n\n\n\nNote\n\n\nChaining functions\n\ncompose(...) will chain functions together like a chain of piped functions."
+    "text": "Functional adverbs\npurrr also offers many adverbs, which modify a function.\n\n\n\nCapturing conditions\n\n\n\nnegate(.f) will return !result.\n\n\n\n\n\n\n\nChaining functions\n\n\n\ncompose(...) will chain functions together like a chain of piped functions."
   },
   {
     "objectID": "slides/functional.html#functional-adverbs-2",
