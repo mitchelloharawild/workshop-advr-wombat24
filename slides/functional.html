@@ -422,26 +422,15 @@ Functional programming
 <section id="functional-programming-1" class="slide level2">
 <h2>Functional programming</h2>
 <p>R is commonly considered a ‘functional’ programming language - and so far we have used functional programming.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1-2"><a></a>  <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb1-3"><a></a>}</span>
-<span id="cb1-4"><a></a><span class="fu">square</span>(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 64</code></pre>
-</div>
-</div>
-<p>The <code>square</code> function is an object like any other in R.</p>
 </section>
 <section id="some-programming-paradigms-in-r" class="slide level2">
 <h2>Some programming paradigms in R</h2>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Note</strong></p>
+<p><strong>Functional programming</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>Functional programming</strong></p>
 <ul>
 <li>Functions are created and used like any other object.</li>
 <li>Output should only depend on the function’s inputs.</li>
@@ -453,10 +442,9 @@ Functional programming
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Note</strong></p>
+<p><strong>Object-oriented programming</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>Object-oriented programming</strong></p>
 <ul>
 <li>Functions are associated with object types.</li>
 <li>Methods of the same ‘function’ produce object-specific output.</li>
@@ -471,10 +459,9 @@ Functional programming
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Note</strong></p>
+<p><strong>Literate programming</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>Literate programming</strong></p>
 <ul>
 <li>Natural language is interspersed with code.</li>
 <li>Aimed at prioritising documentation/comments.</li>
@@ -487,10 +474,9 @@ Functional programming
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Note</strong></p>
+<p><strong>Reactive programming</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>Reactive programming</strong></p>
 <ul>
 <li>Objects are expressed using code based on inputs.</li>
 <li>When inputs change, the object’s value updates.</li>
@@ -501,6 +487,19 @@ Functional programming
 </div>
 </section>
 <section id="functions-are-objects" class="slide level2">
+<h2>Functions are objects</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-2"><a></a>  <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb1-3"><a></a>}</span>
+<span id="cb1-4"><a></a><span class="fu">square</span>(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 64</code></pre>
+</div>
+</div>
+<p>The <code>square</code> function is an object like any other in R.</p>
+</section>
+<section id="functions-are-objects-1" class="slide level2">
 <h2>Functions are objects</h2>
 <p>R functions can be printed,</p>
 <div class="cell">
@@ -521,7 +520,7 @@ Functional programming
 </div>
 </div>
 </section>
-<section id="functions-are-objects-1" class="slide level2">
+<section id="functions-are-objects-2" class="slide level2">
 <h2>Functions are objects</h2>
 <p>put in a list,</p>
 <div class="cell">
@@ -544,7 +543,7 @@ function (..., na.rm = FALSE)  .Primitive("max")</code></pre>
 </div>
 </div>
 </section>
-<section id="functions-are-objects-2" class="slide level2">
+<section id="functions-are-objects-3" class="slide level2">
 <h2>Functions are objects</h2>
 <p>used within lists,</p>
 <div class="cell">
@@ -602,7 +601,7 @@ function (..., na.rm = FALSE)  .Primitive("max")</code></pre>
 </div>
 </div>
 </section>
-<section id="functional-programming-2" class="slide level2">
+<section id="functional-programming-3" class="slide level2">
 <h2>Functional programming</h2>
 <p>Since functions are like any other object, they can also be:</p>
 <ul>
@@ -682,7 +681,7 @@ function (..., na.rm = FALSE)  .Primitive("max")</code></pre>
 </div>
 </div>
 </section>
-<section id="functional-programming-3" class="slide level2">
+<section id="functional-programming-4" class="slide level2">
 <h2>Functional programming</h2>
 <p>Since functions are like any other object, they can also be:</p>
 <ul>

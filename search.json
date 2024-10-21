@@ -613,39 +613,46 @@
     "href": "slides/functional.html#functional-programming-1",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Functional programming",
-    "text": "Functional programming\nR is commonly considered a ‘functional’ programming language - and so far we have used functional programming.\n\nsquare &lt;- function(x) {\n  return(x^2)\n}\nsquare(8)\n\n[1] 64\n\n\nThe square function is an object like any other in R."
+    "text": "Functional programming\nR is commonly considered a ‘functional’ programming language - and so far we have used functional programming."
   },
   {
     "objectID": "slides/functional.html#some-programming-paradigms-in-r",
     "href": "slides/functional.html#some-programming-paradigms-in-r",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Some programming paradigms in R",
-    "text": "Some programming paradigms in R\n\n\n\nNote\n\n\nFunctional programming\n\nFunctions are created and used like any other object.\nOutput should only depend on the function’s inputs.\n\n\n\n\n\n\n\n\nNote\n\n\nObject-oriented programming\n\nFunctions are associated with object types.\nMethods of the same ‘function’ produce object-specific output."
+    "text": "Some programming paradigms in R\n\n\n\nFunctional programming\n\n\n\nFunctions are created and used like any other object.\nOutput should only depend on the function’s inputs.\n\n\n\n\n\n\n\n\nObject-oriented programming\n\n\n\nFunctions are associated with object types.\nMethods of the same ‘function’ produce object-specific output."
   },
   {
     "objectID": "slides/functional.html#some-programming-paradigms-in-r-1",
     "href": "slides/functional.html#some-programming-paradigms-in-r-1",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Some programming paradigms in R",
-    "text": "Some programming paradigms in R\n\n\n\nNote\n\n\nLiterate programming\n\nNatural language is interspersed with code.\nAimed at prioritising documentation/comments.\nNow used to create reproducible reports/documents.\n\n\n\n\n\n\n\n\nNote\n\n\nReactive programming\n\nObjects are expressed using code based on inputs.\nWhen inputs change, the object’s value updates."
+    "text": "Some programming paradigms in R\n\n\n\nLiterate programming\n\n\n\nNatural language is interspersed with code.\nAimed at prioritising documentation/comments.\nNow used to create reproducible reports/documents.\n\n\n\n\n\n\n\n\nReactive programming\n\n\n\nObjects are expressed using code based on inputs.\nWhen inputs change, the object’s value updates."
   },
   {
     "objectID": "slides/functional.html#functions-are-objects",
     "href": "slides/functional.html#functions-are-objects",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Functions are objects",
-    "text": "Functions are objects\nR functions can be printed,\n\nprint(square)\n\nfunction(x) {\n  return(x^2)\n}\n\n\n\ninspected,\n\nformals(square)\n\n$x"
+    "text": "Functions are objects\n\nsquare &lt;- function(x) {\n  return(x^2)\n}\nsquare(8)\n\n[1] 64\n\n\nThe square function is an object like any other in R."
   },
   {
     "objectID": "slides/functional.html#functions-are-objects-1",
     "href": "slides/functional.html#functions-are-objects-1",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Functions are objects",
-    "text": "Functions are objects\nput in a list,\n\nmy_functions &lt;- list(square, sum, min, max)\nmy_functions\n\n[[1]]\nfunction(x) {\n  return(x^2)\n}\n\n[[2]]\nfunction (..., na.rm = FALSE)  .Primitive(\"sum\")\n\n[[3]]\nfunction (..., na.rm = FALSE)  .Primitive(\"min\")\n\n[[4]]\nfunction (..., na.rm = FALSE)  .Primitive(\"max\")"
+    "text": "Functions are objects\nR functions can be printed,\n\nprint(square)\n\nfunction(x) {\n  return(x^2)\n}\n\n\n\ninspected,\n\nformals(square)\n\n$x"
   },
   {
     "objectID": "slides/functional.html#functions-are-objects-2",
     "href": "slides/functional.html#functions-are-objects-2",
+    "title": "WOMBAT 2024: Advanced R Tips & Tricks",
+    "section": "Functions are objects",
+    "text": "Functions are objects\nput in a list,\n\nmy_functions &lt;- list(square, sum, min, max)\nmy_functions\n\n[[1]]\nfunction(x) {\n  return(x^2)\n}\n\n[[2]]\nfunction (..., na.rm = FALSE)  .Primitive(\"sum\")\n\n[[3]]\nfunction (..., na.rm = FALSE)  .Primitive(\"min\")\n\n[[4]]\nfunction (..., na.rm = FALSE)  .Primitive(\"max\")"
+  },
+  {
+    "objectID": "slides/functional.html#functions-are-objects-3",
+    "href": "slides/functional.html#functions-are-objects-3",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Functions are objects",
     "text": "Functions are objects\nused within lists,\n\nmy_functions[[1]](8)\n\n[1] 64\n\n\n\nbut they can’t be subsetted!\n\nsquare$x\n\nError in square$x: object of type 'closure' is not subsettable"
@@ -665,8 +672,8 @@
     "text": "What are functions?\nA function is comprised of three components:\n\nThe arguments/inputs (formals())\nThe body/code (body())\nThe environment (environment())\n\n\n\n\n\n\n\n\n\nYour turn!\n\n\nUse these functions to take a closer look at square().\nTry modifying the function’s formals/body/env with &lt;-."
   },
   {
-    "objectID": "slides/functional.html#functional-programming-2",
-    "href": "slides/functional.html#functional-programming-2",
+    "objectID": "slides/functional.html#functional-programming-3",
+    "href": "slides/functional.html#functional-programming-3",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Functional programming",
     "text": "Functional programming\nSince functions are like any other object, they can also be:\n\ninputs to functions\n\n\n\n\n\n\n\n\nExtensible design with function inputs\n\n\nUsing function inputs can improve your package’s design!\nRather than limiting users to a few specific methods, allow them to use and write any method with functions."
@@ -686,8 +693,8 @@
     "text": "Function arguments\nUsing function operators allows any measure to be used.\n\nMAE &lt;- function(e, ...) mean(abs(e), ...)\nRMSE &lt;- function(e, ...) sqrt(mean(e^2, ...))\naccuracy &lt;- function(e, measure, ...) {\n  ???\n}\naccuracy(rnorm(100), measure = RMSE)\n\n\n\n\n\n\n\n\nYour turn!\n\n\nComplete the accuracy function to calculate accuracy statistics based on the function passed in to measure."
   },
   {
-    "objectID": "slides/functional.html#functional-programming-3",
-    "href": "slides/functional.html#functional-programming-3",
+    "objectID": "slides/functional.html#functional-programming-4",
+    "href": "slides/functional.html#functional-programming-4",
     "title": "WOMBAT 2024: Advanced R Tips & Tricks",
     "section": "Functional programming",
     "text": "Functional programming\nSince functions are like any other object, they can also be:\n\ninputs to functions\noutputs of functions\n\n\n\n\n\n\n\n\nFunctions making functions?\n\n\nThese functions are known as function factories.\nWhere have you seen a function that creates a function?"
