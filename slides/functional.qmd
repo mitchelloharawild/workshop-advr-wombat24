@@ -33,20 +33,10 @@ library(dplyr)
 
 R is commonly considered a 'functional' programming language - and so far we have used functional programming.
 
-```{r}
-square <- function(x) {
-  return(x^2)
-}
-square(8)
-```
-
-The `square` function is an object like any other in R.
-
-
 ## Some programming paradigms in R
 
 ::: {.callout-note icon=false}
-**Functional programming**
+## Functional programming
 
 * Functions are created and used like any other object.
 * Output should only depend on the function's inputs.
@@ -55,7 +45,7 @@ The `square` function is an object like any other in R.
 . . .
 
 ::: {.callout-note icon=false}
-**Object-oriented programming**
+## Object-oriented programming
 
 * Functions are associated with object types.
 * Methods of the same 'function' produce object-specific output.
@@ -64,7 +54,7 @@ The `square` function is an object like any other in R.
 ## Some programming paradigms in R
 
 ::: {.callout-note icon=false}
-**Literate programming**
+## Literate programming
 
 * Natural language is interspersed with code.
 * Aimed at prioritising documentation/comments.
@@ -74,12 +64,23 @@ The `square` function is an object like any other in R.
 . . .
 
 ::: {.callout-note icon=false}
-**Reactive programming**
+## Reactive programming
 
 * Objects are expressed using code based on inputs.
 * When inputs change, the object's value updates.
 :::
 
+
+## Functions are objects
+
+```{r}
+square <- function(x) {
+  return(x^2)
+}
+square(8)
+```
+
+The `square` function is an object like any other in R.
 
 ## Functions are objects
 
