@@ -36,7 +36,9 @@ website:
     - text: Slides
       menu:
         - text: Quirky R
-          href: slides/quirky/
+          href: slides/quirks/
+        - text: Vectorisation
+          href: slides/vectors/
         - text: Metaprogramming
           href: slides/metaprogramming/
     # - text: Feedback
