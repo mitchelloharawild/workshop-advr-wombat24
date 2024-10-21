@@ -43,16 +43,16 @@ website:
           href: slides/metaprogramming/
     # - text: Feedback
     #   href: https://feedback.nectric.com.au/pZ26
-    - text: Exercises
-      href: exercises.qmd
+    # - text: Exercises
+    #   href: exercises.qmd
     right:
       - icon: download
         text: Downloads
         menu:
           - text: Everything
             href: 'https://github.com/mitchelloharawild/workshop-advr-wombat24/archive/refs/heads/main.zip'
-          # - text: Slides
-            # href: 'slides.zip'
+          - text: Slides
+            href: 'slides.zip'
           # - text: Lab sessions
           #   href: 'labs.zip'
       - icon: file-certificate
