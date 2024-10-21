@@ -1,0 +1,609 @@
+---
+title: "WOMBAT 2024: Advanced&nbsp;R&nbsp;Tips&nbsp;&&nbsp;Tricks"
+author: "Quirky R"
+format:
+  beamer:
+    pdf-engine: pdflatex
+    aspectratio: 169
+    fontsize: "14pt,t"
+    section-titles: false
+    knitr:
+      opts_chunk:
+        dev: "cairo_pdf"
+    fig-width: 7.5
+    fig-height: 3.5
+    include-in-header: header.tex
+    keep-tex: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| cache: false
+library(dplyr)
+```
+
+## Outline
+
+\vspace*{0.4cm}
+\tableofcontents
+
+# Background
+
+## Hello!
+
+I'm Mitch!
+
+I make lots of R packages, and teach lots of people!
+
+. . .
+
+::: {.callout-note icon=false}
+## Among other things...
+
+- PhD candidate at Monash University
+- Data consulting and workshops at Nectric
+- Specialised in time series analysis
+- Develops R packages (fable, vitae, etc.)
+- Grows all the things (hobby permaculturist)
+:::
+
+
+## Workshop materials
+
+Are all on the website:
+
+<https://workshop.nectric.com.au/advr-wombat24/>
+
+. . .
+
+:::{.callout-note}
+## Here you'll find...
+
+* these slides
+* demonstrated code
+* video recordings
+* everything you'll need (for the workshop)
+:::
+
+
+## Today's goals (very ambitious!)
+
+1. Understand (and embrace) the quirks of using R
+2. 'Appreciate' how 'helpful' R tries to be
+3. Use vctrs to avoid common problems with vectors
+4. Learn functional programming
+5. Write code that writes and runs code (metaprogramming)
+6. Use non-standard evaluation for code design
+
+## Expectations
+
+1. Follow the code of conduct
+2. Be kind and respectful
+3. Ask relevant questions any time
+4. General Q&A during breaks
+5. Make mistakes and learn!
+
+. . .
+
+:::{.callout-note title="Ask lots of questions!"}
+
+We'll have the most fun exploring the depths of R together.
+:::
+
+## The first question
+
+. . .
+
+::: {.callout-caution}
+
+## Your turn!
+
+**Why are you here?**
+
+What motivates you to learn 'advanced R' tips and tricks?
+
+:::
+
+. . .
+
+::: {.incremental}
+* improve your analysis code?
+* make better R packages?
+* something else?
+:::
+
+
+# R is weird!
+
+## R is weird!
+
+Featured in Kelly Bodwin's useR! 2024 keynote "Keep R weird".
+
+[![](resources/keynote.png)](https://www.youtube.com/watch?v=KOQBfC1WPwM)
+
+## R is weird!
+
+Most software developers (of other languages) are ***SHOCKED*** when they see all the 'weird' behaviour of R.
+
+::: {.incremental}
+* indexing from 1
+* everything is a vectors (there are no scalars)
+* NA (missing values)
+* object types, casting, recycling
+* *functional* programming design
+* lazy and non-standard evaluation
+* *lets you do **anything***
+:::
+
+
+## R is QUIRKY!
+
+I prefer to think of R as ***quirky***. 
+
+These quirks are often 'helpful' for data analysis.
+
+::: {.incremental}
+* indexing from 1
+* everything is a vectors (there are no scalars)
+* NA (missing values)
+* object types, casting, recycling
+* *functional* programming design
+* lazy and non-standard evaluation
+* *lets you do **anything***
+:::
+
+
+## R is QUIRKY!
+
+I prefer to think of R as ***quirky***. 
+
+These quirks are often 'helpful' for data analysis.
+
+::: {.callout-important}
+## R's 'help' can hurt!
+
+Unlike stricter languages, sometimes R's helpful nature can cause *nasty* programming problems.
+:::
+
+## Workshop content
+
+There's a lot of fun things I can show you about R...
+
+. . .
+
+![](resources/alignment.png){width=40%}
+
+
+## Workshop content
+
+::: {.callout-important}
+## Chaotic evil
+
+We can explore the 'dark side' and produce truly evil code...
+:::
+
+. . .
+
+::: {.callout-tip}
+## Lawful good
+Or create lovely code which effortlessly solves problems.
+:::
+
+## The dark side
+
+\full{resources/vader.jpg}
+
+## The dark side
+
+R let's you do *almost* **anything**!
+
+. . .
+
+This includes (figuratively) shooting yourself in the foot.
+
+. . .
+
+::: {.incremental}
+* active bindings
+* changing R itself
+* <https://github.com/romainfrancois/evil.R/>
+* `attach(structure(list(), class = "UserDefinedDatabase"))`
+:::
+
+## Workshop content
+
+Today we'll learn **useful** tips and tricks for R.
+
+* Avoid common mistakes
+* Use powerful features
+
+. . .
+
+
+This workshop will focus on three R-centric topics:
+
+* Vectorisation
+* Functional programming
+* Non-standard evaluation
+
+## Workshop content
+
+:::{.callout-tip}
+## Textbook reference
+
+Much more Advanced R can be found in Hadley Wickham's Advanced R book. It's freely available online here:
+
+<https://adv-r.hadley.nz/>
+:::
+
+# Vectorisation
+
+## Vectorisation
+
+R's design around vectors is perfect for data.
+
+Vectors are objects which store data (several datum) together.
+
+
+::: {.callout-caution}
+
+## Your turn!
+
+What *types* of vectors ('data') do we have?
+:::
+
+## Types of vectors
+
+There are two types of vectors in R:
+
+* Atomic (single-type)
+* List (mixed-type)
+
+## Types of vectors
+
+::: {.callout-caution}
+
+## Your turn!
+
+Which of the following vectors are 'atomic' in R?
+
+* Random numbers
+* Today's date
+* A dataset (data.frame)
+* A matrix
+* $\sqrt{-1}$ (a complex number)
+* `NULL`
+:::
+
+## Subsetting vectors: `x[i]`
+
+\fontsize{10}{10}\sf
+```{r}
+letters
+
+# What's the 13th letter?
+letters[13L]
+
+# What's the last letter?
+letters[length(letters)]
+```
+
+## Subsetting vectors: `x[i]`
+
+\fontsize{10}{10}\sf
+
+Remember: indexing starts at 1!
+
+```{r}
+letters[0L]
+```
+
+. . .
+
+::: {.callout-tip}
+## Negative indices
+
+Remember: R is weird!
+
+\fontsize{10}{10}\sf
+```{r}
+letters[-1L]
+```
+:::
+
+
+## Subsetting vectors: `x[i]`
+
+\fontsize{10}{10}\sf
+```{r}
+# What's the first three letters?
+letters[1:3]
+```
+
+\fontsize{14}{14}\sf
+. . .
+
+::: {.callout-caution}
+## Safe sequences
+
+Using `1:n` is unsafe in general code. `seq_len(n)` is safer.
+
+\fontsize{10}{10}\sf
+```{r}
+# What's the first 'zero' letters?
+n <- 0
+letters[1:n]
+letters[seq_len(n)]
+```
+:::
+
+
+## Subsetting vectors: `x[i, j]`
+
+When subsetting matrices (or arrays) we use multiple indices.
+
+```{r}
+# Get the first row and third column
+volcano[1L,3L]
+```
+
+. . .
+
+::: {.callout-caution}
+## Subsetting simplification
+
+By default R will simplify matrices/arrays into 1-d vectors.
+
+It's often safer to prevent this with `drop = FALSE`.
+:::
+
+
+## Subsetting vectors: `x[i, j]`
+
+\fontsize{10}{10}\sf
+```{r}
+# What's the first column?
+volcano[,1L]
+
+# But with keeping the matrix
+# (empty arguments for positioning is also quirky!)
+volcano[,1L,drop=FALSE]
+```
+:::
+
+
+## Subsetting vectors: `x[[i]]`
+
+::: {.callout-caution}
+
+## Your turn!
+
+**What's the difference between x[i] and x[[i]]?**
+
+This code gives the same result...
+
+\fontsize{10}{10}\sf
+```{r}
+letters[13L]
+letters[[13L]]
+```
+:::
+
+
+## Subsetting (list) vectors: `x[[i]]`
+
+`x[[i]]` is used to subset (list) vectors into their element's type.
+
+Key differences:
+
+* Only works for single indices `i`
+* Drops the (list) structure of `x`
+
+\fontsize{10}{10}\sf
+
+:::{.columns}
+::: {.column width="50%"}
+```{r}
+Orange[2L]
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+Orange[[2L]]
+```
+:::
+:::
+
+## Subsetting (list) vectors: `x$col`
+
+Often we use the list vector's names for subsetting.
+
+\fontsize{10}{10}\sf
+```{r}
+Orange$age
+```
+
+\fontsize{14}{14}\sf
+
+This also works for `x[["col"]]`.
+
+\fontsize{10}{10}\sf
+```{r}
+Orange[["age"]]
+```
+
+
+## Subsetting (list) vectors: `x$col`
+
+Often we use the list vector's names for subsetting.
+
+
+::: {.callout-caution}
+
+## Your turn!
+
+What happens with the following code?
+
+```{r}
+#| eval: false
+Orange["age"]
+Orange["age",]
+Orange[,"age"]
+```
+:::
+
+
+## Subsetting (list) vectors: `x$col`
+
+::: {.callout-important}
+
+## Caution! R's eager to please.
+
+`Orange["age",]` should probably error, but it doesn't.
+There was no rowname called "age", so it gives a 'missing' row.
+
+What does `Orange[NA,]` do?
+
+What about `Orange$a` and `Orange[["a"]]`? What if we also had a column called 'alpine'?
+:::
+
+## Subsetting (list) vectors: `x$col`
+
+\placefig{13.5}{0.5}{width=2cm}{resources/tibble.png}
+
+A tibble is stricter than `data.frame` (it also looks nicer).
+
+By being less 'helpful', it is (a bit) safer.
+
+
+::: {.callout-caution}
+
+## Your turn!
+
+Convert `Orange` into a tibble with `as_tibble()`, then try various subsets.
+```{r}
+#| eval: false
+library(dplyr)
+orange_trees <- as_tibble(Orange)
+orange_trees$a
+orange_trees["age",]
+orange_trees[NA,]
+```
+:::
+
+## Combining vectors: c(x, y)
+
+Vectors are combined with `c()`, short for 'combine'.
+
+```{r}
+c(1, 2, 3)
+```
+
+
+::: {.callout-important}
+## Confusing combinations
+
+What happens when you combine vectors of different types?
+
+Try it!
+:::
+
+## Combining vectors: vec_c(x, y)
+
+\placefig{13.5}{0.5}{width=2cm}{resources/vctrs.png}
+
+The vctrs package makes combining vectors much stricter when you use `vec_c()`.
+
+This is used widely in tidyverse packages now, to make data analysis in the tidyverse safer than base R.
+
+
+::: {.callout-caution}
+## Your turn!
+
+Use `vec_c()` from `{vctrs}` to combine different vectors.
+
+What works, and what errors (safely)?
+:::
+
+## Casting vectors: as_*(), vec_cast()
+
+This vector converting process is known as 'casting'.
+
+Explicit casting with `as.numeric()`, `as.Date()` or `vec_cast()` is good practice.
+
+. . .
+
+::: {.callout-tip}
+## Parsing data from text
+
+It is also safer to explicitly specify column types when reading in data.
+
+The readr package writes this code for you - just copy it!
+:::
+
+## Recycling: vec_recycle()
+
+What happens when you use two vectors of different length?
+
+```{r}
+#| eval: false
+x <- 1:10
+b <- 2
+b^x
+```
+
+. . .
+
+```{r}
+#| echo: false
+x <- 1:10
+b <- 2
+b^x
+```
+
+::: {.callout-tip}
+## So helpful!
+
+R 'recycles' `b` to be the same length as `x`.
+
+This aspect of R's vectorisation is great since we don't need to write a loop.
+:::
+
+## Recycling: vec_recycle()
+
+What if we're calculating the revenue of fruit sales...
+
+\fontsize{10}{10}\sf
+```{r}
+#| warning: true
+fruit <- c("apple", "banana", "kiwi")
+sales <- c(10, 3, 8)
+price <- c(2.99, 4.39)
+sales*price
+```
+
+\fontsize{14}{14}\sf
+::: {.callout-important}
+## Reckless recycling
+
+R 'helpfully' recycles everything, regardless of if their lengths match. At least it warned us something was amiss!
+:::
+
+## Recycling: vec_recycle()
+
+It is safer to only recycle length 1 vectors, which is done in the tidyverse via `vec_recycle()`. If you're ...
+
+* writing packages recycle safely with `vec_recycle()`.
+
+* undertaking analysis be careful of mismatched vector lengths (using data.frame/tibble helps)
+
+::: {.callout-tip}
+## Distribution statistics
+
+The p/d/q/r functions in R are notoriously bad at recycling.
+
+My {distributional} package has much safer behaviour.
+:::
+

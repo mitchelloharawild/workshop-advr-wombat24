@@ -1,0 +1,27 @@
+# outline
+
+* this is advaced r
+* show of hands - why do you want to learn advanced r? analysis? package development? something else?
+* most value probably from questions, for this I have Q&A
+* Loosely based on advr book
+
+# basics
+
+* good / evil / layout (redefining base functions e.g., evil.r, or just segfaults `attach(structure(list(), class = "UserDefinedDatabase"))`)
+
+* seq() vs 1:n
+* subset madness []
+* tibble/data.frame (r trying to be helpful)
+
+# vectors
+
+* initialising
+* typing
+* casting
+* recycling
+
+# functional programming
+
+# metaprog
+
+* ARP week 10 in less depth

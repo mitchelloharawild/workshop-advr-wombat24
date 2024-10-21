@@ -3,6 +3,7 @@ project:
   resources:
     - "images/twitter-card.png"
     - "data"
+    - "slides.zip"
   render:
     - "*.qmd"
     - "!README.qmd"
@@ -36,11 +37,11 @@ website:
     - text: Slides
       menu:
         - text: Quirky R
-          href: slides/quirks/
+          href: slides/quirks.qmd
         - text: Functional programming
-          href: slides/functional/
+          href: slides/functional.qmd
         - text: Metaprogramming
-          href: slides/metaprogramming/
+          href: slides/metaprogramming.qmd
     # - text: Feedback
     #   href: https://feedback.nectric.com.au/pZ26
     # - text: Exercises
