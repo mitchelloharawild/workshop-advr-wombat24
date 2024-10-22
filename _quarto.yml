@@ -54,8 +54,8 @@ website:
             href: 'https://github.com/mitchelloharawild/workshop-advr-wombat24/archive/refs/heads/main.zip'
           - text: Slides
             href: 'slides.zip'
-          # - text: Lab sessions
-          #   href: 'labs.zip'
+          - text: Lab code
+            href: 'labs.R'
       - icon: file-certificate
         href: license.qmd
       - icon: github
